@@ -123,3 +123,8 @@ button:foc .navbar {
   color: #b60226;
   /* Optional: color on hover */
 }
+
+
+.card-padding-bottom {
+  padding-bottom: 10px; 
+}

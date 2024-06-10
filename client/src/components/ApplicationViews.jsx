@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { AuthorizedRoute } from "./auth/AuthorizedRoute";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import AllRoses from "./rose/AllRoses";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -13,7 +14,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           index
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <>Home Page? </>
+              <AllRoses/>
             </AuthorizedRoute>
           }
         />
