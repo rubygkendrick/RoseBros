@@ -17,7 +17,24 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
-       
+        <Route
+          path="cart"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <>Cart View </>
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="userProfile"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <>Profile View</>
+            </AuthorizedRoute>
+          }
+        />
+
+
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}

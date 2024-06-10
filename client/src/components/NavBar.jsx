@@ -29,9 +29,17 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                         <Collapse isOpen={open} navbar>
                             <Nav navbar></Nav>
                         </Collapse>
+                        <NavLink className="nav-item" tag={RRNavLink} to="/cart">
+                            Cart
+                        </NavLink>
+
+                        <NavLink className="nav-item" tag={RRNavLink} to={`/userProfile`}>
+                            Profile
+                        </NavLink>
+
                         <Button
                             className="custom-btn-nav"
-                            
+
                             onClick={(e) => {
                                 e.preventDefault();
                                 setOpen(false);
