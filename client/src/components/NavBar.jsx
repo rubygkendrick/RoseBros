@@ -19,9 +19,9 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
 
     return (
         <div>
-            <Navbar color="light" light fixed="true" expand="lg">
-                <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
-                🌹RoseBros🌹
+            <Navbar className="navbar" light fixed="top" expand="lg">
+                <NavbarBrand className="navbar-brand" tag={RRNavLink} to="/">
+                    RoseBros
                 </NavbarBrand>
                 {loggedInUser ? (
                     <>
@@ -29,8 +29,17 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                         <Collapse isOpen={open} navbar>
                             <Nav navbar></Nav>
                         </Collapse>
+                        <NavLink className="nav-item" tag={RRNavLink} to="/cart">
+                            Cart
+                        </NavLink>
+
+                        <NavLink className="nav-item" tag={RRNavLink} to={`/userProfile`}>
+                            Profile
+                        </NavLink>
+
                         <Button
-                            color="primary"
+                            className="custom-btn-nav"
+
                             onClick={(e) => {
                                 e.preventDefault();
                                 setOpen(false);
@@ -47,7 +56,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                     <Nav navbar>
                         <NavItem>
                             <NavLink tag={RRNavLink} to="/login">
-                                <Button color="primary">Login</Button>
+                                <Button className="custom-btn-nav">Login</Button>
                             </NavLink>
                         </NavItem>
                     </Nav>

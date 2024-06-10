@@ -124,7 +124,7 @@ export default function Register({ setLoggedInUser }) {
         Registration Failure
       </p>
       <Button
-        color="primary"
+        className="custom-btn"
         onClick={handleSubmit}
         disabled={passwordMismatch}
       >

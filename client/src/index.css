@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -15,19 +15,36 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #ea1919;
   text-decoration: inherit;
 }
+
 a:hover {
-  color: #535bf2;
+  color: #ff64a2;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  background-color: black;
+  color: white;
   min-width: 320px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
@@ -42,27 +59,72 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #ff64a2;
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
+.custom-btn-nav {
+  background-color: #bfbcbc6d;
+  border-color: #817f7f6d;
+  margin-right: 1rem;
+}
+
+.custom-btn-nav:hover {
+  background-color: #88011c;
+
+}
+
+.custom-btn {
+  background-color: #bfbcbc6d;
+  border-color: #817f7f6d;
+
+}
+
+.custom-btn:hover {
+  background-color: #88011c;
+}
+
 button:hover {
   border-color: #646cff;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+
+button:foc .navbar {
+  width: 100%;
+  background-color: black;
+  color: white;
+  padding: 3rem 3rem;
+  /* Adjust padding as needed */
+
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.navbar-brand {
+  color: white;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+
+  /* Adjust font size as needed */
+}
+
+
+.navbar-brand:hover {
+  color: #b60226;
+  /* Optional: color on hover */
+}
+
+.nav-item {
+  color: white;
+  font-size: 1rem;
+  margin-right: 2rem;
+
+}
+
+.nav-item:hover {
+  color: #b60226;
+  /* Optional: color on hover */
+}
+
+
+.card-padding-bottom {
+  padding-bottom: 10px; 
 }

@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { AuthorizedRoute } from "./auth/AuthorizedRoute";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
+import AllRoses from "./rose/AllRoses";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -13,11 +14,28 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           index
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <>Home Page? </>
+              <AllRoses/>
             </AuthorizedRoute>
           }
         />
-       
+        <Route
+          path="cart"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <>Cart View </>
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="userProfile"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <>Profile View</>
+            </AuthorizedRoute>
+          }
+        />
+
+
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}
