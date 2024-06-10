@@ -19,9 +19,9 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
 
     return (
         <div>
-            <Navbar color="light" light fixed="true" expand="lg">
-                <NavbarBrand className="mr-auto" tag={RRNavLink} to="/">
-                🌹RoseBros🌹
+            <Navbar className="navbar" light fixed="top" expand="lg">
+                <NavbarBrand className="navbar-brand" tag={RRNavLink} to="/">
+                    RoseBros
                 </NavbarBrand>
                 {loggedInUser ? (
                     <>
@@ -30,7 +30,8 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                             <Nav navbar></Nav>
                         </Collapse>
                         <Button
-                            color="primary"
+                            className="custom-btn-nav"
+                            
                             onClick={(e) => {
                                 e.preventDefault();
                                 setOpen(false);
@@ -47,7 +48,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                     <Nav navbar>
                         <NavItem>
                             <NavLink tag={RRNavLink} to="/login">
-                                <Button color="primary">Login</Button>
+                                <Button className="custom-btn-nav">Login</Button>
                             </NavLink>
                         </NavItem>
                     </Nav>
