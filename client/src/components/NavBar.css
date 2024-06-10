@@ -2,8 +2,6 @@
     color: white;
     font-size: 1.5rem;
     margin-left: 1rem;
-  
-    /* Adjust font size as needed */
   }
   
   .solid-navbar {
@@ -14,7 +12,7 @@
   
   .navbar-brand:hover {
     color: #b60226;
-    /* Optional: color on hover */
+   
   }
   
   .nav-item {
@@ -26,7 +24,7 @@
   
   .nav-item:hover {
     color: #b60226;
-    /* Optional: color on hover */
+
   }
 
   .custom-btn-nav {
