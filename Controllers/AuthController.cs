@@ -102,7 +102,7 @@ public class AuthController : ControllerBase
         var roles = User.FindAll(ClaimTypes.Role).Select(r => r.Value).ToList();
         if (profile != null)
         {
-            var userDto = new UserProfileDTO
+           var userDto = new UserProfileDTO
             {
                 Id = profile.Id,
                 FirstName = profile.FirstName,
@@ -139,13 +139,15 @@ public class AuthController : ControllerBase
         var result = await _userManager.CreateAsync(user, password);
         if (result.Succeeded)
         {
-            _dbContext.UserProfiles.Add(new UserProfile
-            {
-                FirstName = registration.FirstName,
-                LastName = registration.LastName,
-                Address = registration.Address,
-                IdentityUserId = user.Id,
-            });
+           _dbContext.UserProfiles.Add(new UserProfile
+                {
+                    FirstName = registration.FirstName,
+                    LastName = registration.LastName,
+                    Address = registration.Address,
+                    UserName = registration.UserName,
+                    Email = registration.Email,
+                    IdentityUserId = user.Id,
+                });
             _dbContext.SaveChanges();
 
             var claims = new List<Claim>
