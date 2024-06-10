@@ -1,0 +1,10 @@
+.card-padding-bottom {
+    padding-bottom: 5px; 
+  }
+
+  .rose-title {
+    color: black
+  }
+  .rose-title:hover {
+    background-color: #88011c;
+  }

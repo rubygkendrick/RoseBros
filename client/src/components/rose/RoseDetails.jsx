@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./RoseDetails.css"
 
 
 import { useNavigate, useParams } from "react-router-dom";

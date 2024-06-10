@@ -1,0 +1,17 @@
+.custom-card {
+    width: 666px;
+    margin-top: 100px; /* this is for the RoseDetails Card */
+  }
+  
+  .custom-card img {
+    width: 100%; 
+    height: auto; 
+  }
+  
+  .price-tag {
+    margin-top: 100px;
+  }
+  
+  .qty-input {
+    margin-top: 20px;
+  }

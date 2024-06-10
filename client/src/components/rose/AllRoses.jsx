@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./AllRoses.css"
 
 import { Link, useNavigate } from "react-router-dom";
 import { Card, CardBody, CardTitle, CardText, CardImg, Row, Col } from "reactstrap";
@@ -27,7 +28,7 @@ export default function AllRoses({ loggedInUser, setLoggedInUser, roles }) {
                         <Card className="my-3">
                             <CardImg top width="100%" src={rose.image} alt={rose.name} />
                             <CardBody className="card-padding-bottom">
-                                <Link to={`/rose/${rose.id}`}><CardTitle tag="h2">{rose.name}</CardTitle></Link>
+                                <Link to={`/rose/${rose.id}`}className="rose-title"><CardTitle tag="h2">{rose.name}</CardTitle></Link>
                                 <CardText>{rose.habit?.name} Rose</CardText>
                                 <CardText>${rose.pricePerUnit} per bareroot</CardText>
                             </CardBody>
