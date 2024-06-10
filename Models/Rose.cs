@@ -26,5 +26,6 @@ public class Rose
     public string Image { get; set; }
     [Required]
     public decimal PricePerUnit { get; set; }
+     public List<OrderRose> OrderRoses { get; set; }
 
 }

@@ -4,8 +4,6 @@ namespace RoseBros.Models;
 
 public class OrderRose
 {
-    [Required]
-    public int Id { get; set; }
 
     [Required]
     public int OrderId {get; set;}
