@@ -49,6 +49,8 @@ public class RoseBrosDbContext : IdentityDbContext<IdentityUser>
             IdentityUserId = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
             FirstName = "Admina",
             LastName = "Strator",
+            UserName = "Boss",
+            Email = "admina@strator.comx",
             Address = "101 Main Street",
         });
 
