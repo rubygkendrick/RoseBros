@@ -4,6 +4,7 @@ import { AuthorizedRoute } from "./auth/AuthorizedRoute";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import AllRoses from "./rose/AllRoses";
+import RoseDetails from "./rose/RoseDetails";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -15,6 +16,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
               <AllRoses/>
+            </AuthorizedRoute>
+          }
+        />
+         <Route
+          path="/rose/:id"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <RoseDetails/>
             </AuthorizedRoute>
           }
         />

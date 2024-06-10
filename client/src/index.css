@@ -15,12 +15,12 @@
 
 a {
   font-weight: 500;
-  color: #ea1919;
+  color: #000000;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #ff64a2;
+  color: #b60226;
 }
 
 body {
@@ -59,7 +59,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #ff64a2;
+  background-color: #bfbcbc6d;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -106,6 +106,11 @@ button:foc .navbar {
   /* Adjust font size as needed */
 }
 
+.solid-navbar {
+  background-color: #242424; /* Change to the desired background color */
+}
+
+
 
 .navbar-brand:hover {
   color: #b60226;
@@ -127,4 +132,22 @@ button:foc .navbar {
 
 .card-padding-bottom {
   padding-bottom: 10px; 
+}
+
+.custom-card {
+  width: 666px;
+  margin-top: 100px; /* this is for the RoseDetails Card */
+}
+
+.custom-card img {
+  width: 100%; 
+  height: auto; 
+}
+
+.price-tag {
+  margin-top: 100px;
+}
+
+.qty-input {
+  margin-top: 20px;
 }

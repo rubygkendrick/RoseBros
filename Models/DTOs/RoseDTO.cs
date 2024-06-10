@@ -10,6 +10,7 @@ public class RoseDTO
     public string Name { get; set; }
 
     public int ColorId { get; set; }
+    public ColorDTO Color {get; set;}
 
     public int HabitId { get; set; }
     public HabitDTO Habit {get; set;}
