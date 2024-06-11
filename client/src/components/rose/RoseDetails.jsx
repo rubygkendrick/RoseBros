@@ -37,7 +37,7 @@ export default function RoseDetails({ loggedInUser }) {
             window.alert("You must enter a valid quantity");
             return;
         }
-    
+
         // eslint-disable-next-line react/prop-types
         newOrder(loggedInUser.id).then((createdOrder) => {
             const orderRose = {
@@ -45,11 +45,15 @@ export default function RoseDetails({ loggedInUser }) {
                 roseId: parseInt(id),
                 quantity: quantity
             };
-            console.log(orderRose)
             // eslint-disable-next-line react/prop-types
             newOrderRose(orderRose, loggedInUser.id).then(() => {
+
                 toggleModal()
-            })
+            }).catch((error) => {
+                if (error) {
+                    window.alert(`Error: ${error}`);
+                }
+            });
 
         }).catch((error) => {
             console.error("Error adding to cart:", error);

@@ -7,5 +7,11 @@ export const newOrderRose = (orderRose, userId) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(orderRose),
-    }).then((res) => res.json());
+    }).then(response => {
+        if (!response.ok) {
+          return response.text().then(text => {
+            return Promise.reject(text);
+          });
+        }   
+      });
   };
