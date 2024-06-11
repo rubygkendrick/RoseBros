@@ -15,12 +15,12 @@
 
 a {
   font-weight: 500;
-  color: #ea1919;
+  color: white;
   text-decoration: inherit;
 }
 
 a:hover {
-  color: #ff64a2;
+  color: #700000;
 }
 
 body {
@@ -59,21 +59,11 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #ff64a2;
+  background-color: #bfbcbc6d;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
-.custom-btn-nav {
-  background-color: #bfbcbc6d;
-  border-color: #817f7f6d;
-  margin-right: 1rem;
-}
-
-.custom-btn-nav:hover {
-  background-color: #88011c;
-
-}
 
 .custom-btn {
   background-color: #bfbcbc6d;
@@ -82,49 +72,11 @@ button {
 }
 
 .custom-btn:hover {
-  background-color: #88011c;
-}
-
-button:hover {
-  border-color: #646cff;
-}
-
-button:foc .navbar {
-  width: 100%;
-  background-color: black;
-  color: white;
-  padding: 3rem 3rem;
-  /* Adjust padding as needed */
-
-}
-
-.navbar-brand {
-  color: white;
-  font-size: 1.5rem;
-  margin-left: 1rem;
-
-  /* Adjust font size as needed */
+  background-color: #700000;
 }
 
 
-.navbar-brand:hover {
-  color: #b60226;
-  /* Optional: color on hover */
-}
-
-.nav-item {
-  color: white;
-  font-size: 1rem;
-  margin-right: 2rem;
-
-}
-
-.nav-item:hover {
-  color: #b60226;
-  /* Optional: color on hover */
-}
 
 
-.card-padding-bottom {
-  padding-bottom: 10px; 
-}
+
+
