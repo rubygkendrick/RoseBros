@@ -19,7 +19,7 @@ public class OrderController : ControllerBase
         _dbContext = context;
     }
 
-    [HttpPost("/newOrder")]
+    [HttpPost("newOrder")]
     [Authorize]
     public IActionResult CreateOrder([FromQuery] int userId)
     {
@@ -46,11 +46,11 @@ public class OrderController : ControllerBase
             _dbContext.Orders.Add(newOrder);
             _dbContext.SaveChanges();
 
-            return Ok();
+            return Ok(newOrder);
         }
         else 
         {
-            return BadRequest("This order already exists");
+            return Ok(existingOrder);
         }
 
     }

@@ -19,9 +19,9 @@ public class OrderRoseController : ControllerBase
         _dbContext = context;
     }
 
-    [HttpPost("/newOrderRose")]
+    [HttpPost("newOrderRose")]
     [Authorize]
-    public IActionResult CreateOrderRose(OrderRose orderRose, [FromQuery] int userId)
+    public IActionResult CreateOrderRose([FromBody] OrderRose orderRose, [FromQuery] int userId)
     {
         var user = _dbContext.UserProfiles.SingleOrDefault(u => u.Id == userId);
 
@@ -30,22 +30,18 @@ public class OrderRoseController : ControllerBase
             return NotFound("User doesn't exist in the system");
         }
 
+        var existingOrderRose = _dbContext.OrderRoses.SingleOrDefault(or => or.RoseId == orderRose.RoseId 
+        && or.OrderId == orderRose.OrderId);
 
-        var existingOrder = _dbContext.Orders
-            .SingleOrDefault(o => o.IsActive && o.UserProfileId == userId);
-
-       
-        if (existingOrder != null)
+        if (existingOrderRose != null)
         {
-            var existingOrderRose = _dbContext.OrderRoses.SingleOrDefault(or => or.OrderId == existingOrder.Id);
+            return BadRequest("This Rose is already in your cart");
+        }
 
-            if (existingOrderRose != null) 
-            {
-               return BadRequest("This Rose is already in your cart");
-            }
+
             var newOrderRose = new OrderRose
             {
-                OrderId = existingOrder.Id,
+                OrderId = orderRose.OrderId,
                 RoseId = orderRose.RoseId,
                 Quantity = orderRose.Quantity
             };
@@ -53,17 +49,13 @@ public class OrderRoseController : ControllerBase
             _dbContext.OrderRoses.Add(newOrderRose);
             _dbContext.SaveChanges();
 
-            return NoContent();
+            return Ok(newOrderRose);
 
         }
-        else 
-        {
-            return BadRequest("This order doesn't exist yet, please start an order before adding a Rose.");
-        }
+       
 
     }
 
 
 
 
-}

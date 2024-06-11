@@ -26,7 +26,12 @@ public class Order
     {
         get
         {
-            return OrderRoses.Sum(or => or.Rose.PricePerUnit * or.Quantity);
+            if (OrderRoses == null)
+            {
+                return 0;
+            }
+            
+           return OrderRoses.Sum(or => (or.Rose?.PricePerUnit ?? 0) * or.Quantity);
         }
     }
 
