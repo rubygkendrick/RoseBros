@@ -20,7 +20,7 @@ a {
 }
 
 a:hover {
-  color: #b60226;
+  color: #700000;
 }
 
 body {
@@ -72,7 +72,7 @@ button {
 }
 
 .custom-btn:hover {
-  background-color: #88011c;
+  background-color: #700000;
 }
 
 

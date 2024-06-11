@@ -1,29 +1,43 @@
 import { useState, useEffect } from "react";
 import "./RoseDetails.css"
-
-
 import { useNavigate, useParams } from "react-router-dom";
 import { getRoseById } from "../../managers/roseManager";
-import { Button, Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
-
-
+import { Button, Card, CardBody, CardImg, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
 export default function RoseDetails() {
     const [rose, setRose] = useState([]);
+    const [modal, setModal] = useState(false);
     const { id } = useParams();
 
-
     const navigate = useNavigate();
+    const toggleModal = () => setModal(!modal);
 
     const getAndResetRose = () => {
         getRoseById(id).then(setRose);
     };
 
-
     useEffect(() => {
         getAndResetRose();
-
     }, []);
+
+    const handleAddToCart = () => {
+        // Call your post order functionality here
+        // Example:
+        // postOrder(rose.id);
+
+        // Show the modal
+        toggleModal();
+    };
+
+    const handleContinueToCart = () => {
+        toggleModal();
+        // Navigate to the cart page
+        navigate('/cart');
+    };
+
+    const handleKeepShopping = () => {
+        toggleModal();
+    };
 
 
 
@@ -49,10 +63,22 @@ export default function RoseDetails() {
                 <label>Quantity:</label>
                 <input type="number" id="quantity" name="quantity" min="1" max="100" />
             </div>
-            <Button className="custom-btn"
-                style={{ marginTop: '40px', marginBottom: '200px' }}>
-                Add To Cart</Button>
+            <div>
+                <Button className="custom-btn" onClick={handleAddToCart} style={{ marginTop: '40px' }}>
+                    Add To Cart
+                </Button>
 
+                <Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
+                    <ModalHeader toggle={toggleModal}className="custom-modal-header">Added to Cart</ModalHeader>
+                    <ModalBody className="custom-modal-body">
+                        Would you like to continue to the cart or keep shopping?
+                    </ModalBody>
+                    <ModalFooter className="custom-modal-footer">
+                        <Button className="custom-modal-button" onClick={handleContinueToCart}>Go to Cart</Button>{' '}
+                        <Button className="custom-modal-button-secondary" onClick={handleKeepShopping}>Keep Shopping</Button>
+                    </ModalFooter>
+                </Modal>
+            </div>
         </>
     );
 
