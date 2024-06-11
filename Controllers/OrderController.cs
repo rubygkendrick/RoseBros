@@ -19,7 +19,7 @@ public class OrderController : ControllerBase
         _dbContext = context;
     }
 
-    [HttpPost("/new")]
+    [HttpPost("/newOrder")]
     [Authorize]
     public IActionResult CreateOrder(OrderRose orderRose, [FromQuery] int userId)
     {

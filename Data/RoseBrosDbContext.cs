@@ -60,13 +60,15 @@ public class RoseBrosDbContext : IdentityDbContext<IdentityUser>
         modelBuilder.Entity<OrderRose>()
             .HasOne(or => or.Order)
             .WithMany(o => o.OrderRoses)
-            .HasForeignKey(or => or.OrderId);
+            .HasForeignKey(or => or.OrderId)
+            .IsRequired(false);
 
         modelBuilder.Entity<OrderRose>()
-              .HasOne(or => or.Rose)
-              .WithMany(r => r.OrderRoses)
-              .HasForeignKey(or => or.RoseId);
-
+            .HasOne(or => or.Rose)
+            .WithMany()
+            .HasForeignKey(or => or.RoseId)
+            .IsRequired(false);
+            
         modelBuilder.Entity<Habit>().HasData(
             new Habit
             {

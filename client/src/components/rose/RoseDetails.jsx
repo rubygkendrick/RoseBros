@@ -3,9 +3,12 @@ import "./RoseDetails.css"
 import { useNavigate, useParams } from "react-router-dom";
 import { getRoseById } from "../../managers/roseManager";
 import { Button, Card, CardBody, CardImg, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { newOrder } from "../../managers/orderManager";
 
-export default function RoseDetails() {
+// eslint-disable-next-line react/prop-types
+export default function RoseDetails({ loggedInUser }) {
     const [rose, setRose] = useState([]);
+    const [quantity, setQuantity] = useState(0);
     const [modal, setModal] = useState(false);
     const { id } = useParams();
 
@@ -20,13 +23,28 @@ export default function RoseDetails() {
         getAndResetRose();
     }, []);
 
-    const handleAddToCart = () => {
-        // Call your post order functionality here
-        // createNewOrder(it will take a order rose object and the userId)
-        
 
-        // Show the modal
-        toggleModal();
+    const handleQuantityChange = (event) => {
+
+        setQuantity(parseInt(event.target.value));
+    };
+
+
+    const handleAddToCart = () => {
+        if (quantity === 0) {
+            window.alert("You must enter a quantity");
+            return;
+        }
+
+        const orderRose = {
+            roseId: id,
+            quantity: quantity
+        };
+
+        // eslint-disable-next-line react/prop-types
+        newOrder(orderRose, loggedInUser.id).then(() => {
+            toggleModal();
+        });
     };
 
     const handleContinueToCart = () => {
@@ -58,8 +76,16 @@ export default function RoseDetails() {
             </div>
 
             <div className="qty-input">
-                <label>Quantity:</label>
-                <input type="number" id="quantity" name="quantity" min="1" max="100" />
+                <label htmlFor="quantity">Quantity:</label>
+                <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="1"
+                    max="100"
+                    defaultValue=""
+                    onChange={handleQuantityChange}
+                />
             </div>
             <div>
                 <Button className="custom-btn" onClick={handleAddToCart} style={{ marginTop: '40px' }}>
@@ -67,7 +93,7 @@ export default function RoseDetails() {
                 </Button>
 
                 <Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
-                    <ModalHeader toggle={toggleModal}className="custom-modal-header">Added to Cart</ModalHeader>
+                    <ModalHeader toggle={toggleModal} className="custom-modal-header">Added to Cart</ModalHeader>
                     <ModalBody className="custom-modal-body">
                         Would you like to continue to the cart or keep shopping?
                     </ModalBody>
