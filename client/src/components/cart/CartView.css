@@ -1,0 +1,63 @@
+.custom-card {
+    width: 666px;
+    margin-top: 100px;
+    /* this is for the RoseDetails Card */
+  }
+  
+  .custom-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .price-tag {
+    margin-top: 100px;
+  }
+  
+  .qty-input {
+    margin-top: 20px;
+  }
+  
+  
+  
+  .custom-modal {
+    background-color: #333333;
+    color: #ffffff;
+    padding: 20px;
+  }
+  
+  .custom-modal-header {
+    background-color: #565656;
+    color: #ffffff;
+    border-bottom: none; 
+   
+  }
+  
+  .custom-modal-footer {
+    background-color: #565656;
+    color: #ffffff; 
+    border-top: none;
+  }
+  
+  .custom-modal-body {
+    background-color: #565656;
+    color: #ffffff;
+  
+  }
+  
+  .custom-modal-button {
+    background-color: #700000;
+    color: #ffffff;
+  }
+  
+  .custom-modal-button:hover {
+    background-color: #121212;
+  }
+  
+  .custom-modal-button-secondary {
+    background-color: #2322226d;
+    color: #ffffff;
+  }
+  
+  .custom-modal-button-secondary:hover {
+    background-color: #121212;
+  }

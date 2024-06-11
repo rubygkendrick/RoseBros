@@ -48,13 +48,30 @@ public class OrderController : ControllerBase
 
             return Ok(newOrder);
         }
-        else 
+        else
         {
             return Ok(existingOrder);
         }
 
     }
 
+    [HttpGet("active/{userId}")]
+    [Authorize]
+    public IActionResult GetActiveORderByUserId(int userId)
+    {
+       Order activeOrder = _dbContext.Orders
+        .Include(o => o.OrderRoses)
+        .ThenInclude(or => or.Rose).Where(o => o.IsActive == true)
+        .SingleOrDefault(o => o.UserProfileId == userId);
+
+        if (activeOrder == null)
+        {
+            return NotFound("There is no active order for this user");
+        }
+
+        //change this to return a DTO 
+       return Ok(activeOrder);
+    }
 
 
 

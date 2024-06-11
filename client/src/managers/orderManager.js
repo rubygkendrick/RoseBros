@@ -9,3 +9,8 @@ export const newOrder = (userId) => {
       body: JSON.stringify( userId ),
     }).then((res) => res.json());
   };
+
+  export const getActiveOrderByUserId = (userId) => {
+    return fetch(`${_apiUrl}/active/${userId}`).then((res) => res.json());
+  };
+  
