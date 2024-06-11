@@ -37,7 +37,6 @@ export default function RoseDetails({ loggedInUser }) {
             window.alert("You must enter a valid quantity");
             return;
         }
-
         // eslint-disable-next-line react/prop-types
         newOrder(loggedInUser.id).then((createdOrder) => {
             const orderRose = {
