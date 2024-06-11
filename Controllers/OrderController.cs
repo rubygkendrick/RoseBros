@@ -21,7 +21,7 @@ public class OrderController : ControllerBase
 
     [HttpPost("/newOrder")]
     [Authorize]
-    public IActionResult CreateOrder(OrderRose orderRose, [FromQuery] int userId)
+    public IActionResult CreateOrder([FromQuery] int userId)
     {
         var user = _dbContext.UserProfiles.SingleOrDefault(u => u.Id == userId);
 
@@ -35,7 +35,6 @@ public class OrderController : ControllerBase
 
         if (existingOrder == null)
         {
-            // Create a new order and new OrderRose
             var newOrder = new Order
             {
                 UserProfileId = userId,
@@ -45,34 +44,15 @@ public class OrderController : ControllerBase
             };
 
             _dbContext.Orders.Add(newOrder);
-            _dbContext.SaveChanges(); // Save to get the new Order ID
-
-            var newOrderRose = new OrderRose
-            {
-                OrderId = newOrder.Id, // Use the generated ID
-                RoseId = orderRose.RoseId,
-                Quantity = orderRose.Quantity
-            };
-
-            _dbContext.OrderRoses.Add(newOrderRose);
             _dbContext.SaveChanges();
 
-            return NoContent();
+            return Ok();
         }
-        else
+        else 
         {
-            var newOrderRose = new OrderRose
-            {
-                OrderId = existingOrder.Id,
-                RoseId = orderRose.RoseId,
-                Quantity = orderRose.Quantity
-            };
-
-            _dbContext.OrderRoses.Add(newOrderRose);
-            _dbContext.SaveChanges();
-
-            return NoContent();
+            return BadRequest("This order already exists");
         }
+
     }
 
 
