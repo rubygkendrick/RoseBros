@@ -43,8 +43,6 @@ export default function RoseDetails() {
 
     return (
         <>
-
-
             <div key={rose.id} className="custom-card">
                 <h1>{rose.name}</h1>
                 <h3>{rose.habit?.name} Rose</h3>

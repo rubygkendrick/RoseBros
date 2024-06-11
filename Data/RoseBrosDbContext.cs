@@ -215,6 +215,7 @@ public class RoseBrosDbContext : IdentityDbContext<IdentityUser>
               UserProfileId = 1,
               PurchaseDate = DateTime.Now,
               IsFulfilled = false,
+              IsActive = false
           },
           new Order
           {
@@ -222,6 +223,7 @@ public class RoseBrosDbContext : IdentityDbContext<IdentityUser>
               UserProfileId = 1,
               PurchaseDate = DateTime.Now,
               IsFulfilled = true,
+              IsActive = false,
           }
 
 

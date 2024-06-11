@@ -5,29 +5,30 @@ namespace RoseBros.Models;
 
 public class Order
 {
-   
+
     public int Id { get; set; }
 
     [Required]
-    public int UserProfileId {get; set;}
+    public int UserProfileId { get; set; }
 
-    public UserProfile UserProfile {get; set;}
+    public UserProfile UserProfile { get; set; }
 
     [Required]
-    public DateTime PurchaseDate {get; set;}
+    public DateTime PurchaseDate { get; set; }
     [Required]
-    public bool IsFulfilled {get; set; }
+    public bool IsFulfilled { get; set; }
+    public bool IsActive { get; set; }
 
-    public List <OrderRose>? OrderRoses {get; set;}
+    public List<OrderRose>? OrderRoses { get; set; }
 
     [NotMapped]
-    public decimal Total 
+    public decimal Total
     {
-        get 
+        get
         {
             return OrderRoses.Sum(or => or.Rose.PricePerUnit * or.Quantity);
         }
     }
- 
+
 
 }
