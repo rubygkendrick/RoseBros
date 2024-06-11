@@ -3,9 +3,14 @@ import "./RoseDetails.css"
 import { useNavigate, useParams } from "react-router-dom";
 import { getRoseById } from "../../managers/roseManager";
 import { Button, Card, CardBody, CardImg, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
+import { newOrder } from "../../managers/orderManager";
+import { newOrderRose } from "../../managers/orderRoseManager";
 
-export default function RoseDetails() {
+
+// eslint-disable-next-line react/prop-types
+export default function RoseDetails({ loggedInUser }) {
     const [rose, setRose] = useState([]);
+    const [quantity, setQuantity] = useState(0);
     const [modal, setModal] = useState(false);
     const { id } = useParams();
 
@@ -20,13 +25,39 @@ export default function RoseDetails() {
         getAndResetRose();
     }, []);
 
-    const handleAddToCart = () => {
-        // Call your post order functionality here
-        // Example:
-        // postOrder(rose.id);
 
-        // Show the modal
-        toggleModal();
+    const handleQuantityChange = (event) => {
+
+        setQuantity(parseInt(event.target.value));
+    };
+
+
+    const handleAddToCart = () => {
+        if (quantity <= 0 || isNaN(quantity)) {
+            window.alert("You must enter a valid quantity");
+            return;
+        }
+        // eslint-disable-next-line react/prop-types
+        newOrder(loggedInUser.id).then((createdOrder) => {
+            const orderRose = {
+                orderId: parseInt(createdOrder.id),
+                roseId: parseInt(id),
+                quantity: quantity
+            };
+            // eslint-disable-next-line react/prop-types
+            newOrderRose(orderRose, loggedInUser.id).then(() => {
+
+                toggleModal()
+            }).catch((error) => {
+                if (error) {
+                    window.alert(`Error: ${error}`);
+                }
+            });
+
+        }).catch((error) => {
+            console.error("Error adding to cart:", error);
+            window.alert("An error occurred while adding to the cart. Please try again.");
+        });
     };
 
     const handleContinueToCart = () => {
@@ -43,8 +74,6 @@ export default function RoseDetails() {
 
     return (
         <>
-
-
             <div key={rose.id} className="custom-card">
                 <h1>{rose.name}</h1>
                 <h3>{rose.habit?.name} Rose</h3>
@@ -60,8 +89,16 @@ export default function RoseDetails() {
             </div>
 
             <div className="qty-input">
-                <label>Quantity:</label>
-                <input type="number" id="quantity" name="quantity" min="1" max="100" />
+                <label htmlFor="quantity">Quantity:</label>
+                <input
+                    type="number"
+                    id="quantity"
+                    name="quantity"
+                    min="1"
+                    max="100"
+                    defaultValue=""
+                    onChange={handleQuantityChange}
+                />
             </div>
             <div>
                 <Button className="custom-btn" onClick={handleAddToCart} style={{ marginTop: '40px' }}>
@@ -69,7 +106,7 @@ export default function RoseDetails() {
                 </Button>
 
                 <Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
-                    <ModalHeader toggle={toggleModal}className="custom-modal-header">Added to Cart</ModalHeader>
+                    <ModalHeader toggle={toggleModal} className="custom-modal-header">Added to Cart</ModalHeader>
                     <ModalBody className="custom-modal-body">
                         Would you like to continue to the cart or keep shopping?
                     </ModalBody>

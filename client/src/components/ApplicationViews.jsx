@@ -23,7 +23,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="/rose/:id"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <RoseDetails/>
+              <RoseDetails loggedInUser={loggedInUser}/>
             </AuthorizedRoute>
           }
         />

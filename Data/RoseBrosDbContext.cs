@@ -55,7 +55,7 @@ public class RoseBrosDbContext : IdentityDbContext<IdentityUser>
         });
 
         modelBuilder.Entity<OrderRose>()
-              .HasKey(or => new { or.OrderId, or.RoseId });
+             .HasKey(or => new { or.OrderId, or.RoseId });
 
         modelBuilder.Entity<OrderRose>()
             .HasOne(or => or.Order)
@@ -66,6 +66,7 @@ public class RoseBrosDbContext : IdentityDbContext<IdentityUser>
               .HasOne(or => or.Rose)
               .WithMany(r => r.OrderRoses)
               .HasForeignKey(or => or.RoseId);
+
 
         modelBuilder.Entity<Habit>().HasData(
             new Habit
@@ -215,6 +216,7 @@ public class RoseBrosDbContext : IdentityDbContext<IdentityUser>
               UserProfileId = 1,
               PurchaseDate = DateTime.Now,
               IsFulfilled = false,
+              IsActive = false
           },
           new Order
           {
@@ -222,6 +224,7 @@ public class RoseBrosDbContext : IdentityDbContext<IdentityUser>
               UserProfileId = 1,
               PurchaseDate = DateTime.Now,
               IsFulfilled = true,
+              IsActive = false,
           }
 
 

@@ -12,7 +12,7 @@ using RoseBros.Data;
 namespace RoseBros.Migrations
 {
     [DbContext(typeof(RoseBrosDbContext))]
-    [Migration("20240610154502_InitialCreate")]
+    [Migration("20240611163749_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -152,13 +152,13 @@ namespace RoseBros.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "21f9d35c-e06a-485c-8ee0-308eb452e89c",
+                            ConcurrencyStamp = "2191597e-7770-4e43-9e3e-d0da05244922",
                             Email = "admina@strator.comx",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEOtGunb6q9xi6aOjRZs/wwXWyasoDe2wl+YqiRBtgod5JYfCzkwZ7sltSKMNZrSokw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENuCCFDICPot7QimgSLTL8v5q66TpJM17tUarzLZ617Nt63rkP7Vb82q6KSd3dK/EQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "70233aa7-02f2-4129-a29f-79135acb1a3f",
+                            SecurityStamp = "b7aa2a34-9b9b-4b14-ba53-ed47b26b5003",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });
@@ -343,6 +343,9 @@ namespace RoseBros.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsFulfilled")
                         .HasColumnType("boolean");
 
@@ -362,15 +365,17 @@ namespace RoseBros.Migrations
                         new
                         {
                             Id = 1,
+                            IsActive = false,
                             IsFulfilled = false,
-                            PurchaseDate = new DateTime(2024, 6, 10, 10, 45, 1, 943, DateTimeKind.Local).AddTicks(3640),
+                            PurchaseDate = new DateTime(2024, 6, 11, 11, 37, 48, 755, DateTimeKind.Local).AddTicks(8350),
                             UserProfileId = 1
                         },
                         new
                         {
                             Id = 2,
+                            IsActive = false,
                             IsFulfilled = true,
-                            PurchaseDate = new DateTime(2024, 6, 10, 10, 45, 1, 943, DateTimeKind.Local).AddTicks(3690),
+                            PurchaseDate = new DateTime(2024, 6, 11, 11, 37, 48, 755, DateTimeKind.Local).AddTicks(8400),
                             UserProfileId = 1
                         });
                 });

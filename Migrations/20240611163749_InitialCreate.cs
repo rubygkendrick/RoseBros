@@ -246,7 +246,8 @@ namespace RoseBros.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserProfileId = table.Column<int>(type: "integer", nullable: false),
                     PurchaseDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    IsFulfilled = table.Column<bool>(type: "boolean", nullable: false)
+                    IsFulfilled = table.Column<bool>(type: "boolean", nullable: false),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -292,7 +293,7 @@ namespace RoseBros.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "21f9d35c-e06a-485c-8ee0-308eb452e89c", "admina@strator.comx", false, false, null, null, null, "AQAAAAIAAYagAAAAEOtGunb6q9xi6aOjRZs/wwXWyasoDe2wl+YqiRBtgod5JYfCzkwZ7sltSKMNZrSokw==", null, false, "70233aa7-02f2-4129-a29f-79135acb1a3f", false, "Administrator" });
+                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "2191597e-7770-4e43-9e3e-d0da05244922", "admina@strator.comx", false, false, null, null, null, "AQAAAAIAAYagAAAAENuCCFDICPot7QimgSLTL8v5q66TpJM17tUarzLZ617Nt63rkP7Vb82q6KSd3dK/EQ==", null, false, "b7aa2a34-9b9b-4b14-ba53-ed47b26b5003", false, "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "Colors",
@@ -345,11 +346,11 @@ namespace RoseBros.Migrations
 
             migrationBuilder.InsertData(
                 table: "Orders",
-                columns: new[] { "Id", "IsFulfilled", "PurchaseDate", "UserProfileId" },
+                columns: new[] { "Id", "IsActive", "IsFulfilled", "PurchaseDate", "UserProfileId" },
                 values: new object[,]
                 {
-                    { 1, false, new DateTime(2024, 6, 10, 10, 45, 1, 943, DateTimeKind.Local).AddTicks(3640), 1 },
-                    { 2, true, new DateTime(2024, 6, 10, 10, 45, 1, 943, DateTimeKind.Local).AddTicks(3690), 1 }
+                    { 1, false, false, new DateTime(2024, 6, 11, 11, 37, 48, 755, DateTimeKind.Local).AddTicks(8350), 1 },
+                    { 2, false, true, new DateTime(2024, 6, 11, 11, 37, 48, 755, DateTimeKind.Local).AddTicks(8400), 1 }
                 });
 
             migrationBuilder.InsertData(
