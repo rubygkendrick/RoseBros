@@ -22,8 +22,8 @@ export default function RoseDetails() {
 
     const handleAddToCart = () => {
         // Call your post order functionality here
-        // Example:
-        // postOrder(rose.id);
+        // createNewOrder(it will take a order rose object and the userId)
+        
 
         // Show the modal
         toggleModal();
