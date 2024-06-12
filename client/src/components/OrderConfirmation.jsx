@@ -5,7 +5,7 @@ export default function OrderConfirmation({loggedInUser}) {
 
  const user = loggedInUser;
   
-
+ 
 
 
     return (
