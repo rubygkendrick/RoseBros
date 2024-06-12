@@ -2,12 +2,19 @@
   color: white;
   font-size: 1.5rem;
   margin-left: 1rem;
+  text-decoration: none; /* Remove any underline */
 }
 
-.navbar-brand:hover {
-  color: #b60226;
-
+.navbar-brand:hover
+{
+  color: #700000; /* Red color on hover or focus */
 }
+
+
+.navbar-brand:visited {
+  color:white; /* Red color */
+}
+
 
 .nav-item {
   color: white;
@@ -34,5 +41,6 @@
 
 .solid-navbar {
   background-color: #242424;
- 
+  /* Change to the desired background color */
 }
+
