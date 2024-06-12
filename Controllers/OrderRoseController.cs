@@ -111,7 +111,7 @@ public class OrderRoseController : ControllerBase
        
         if (!activeOrder.OrderRoses.Any())
         {
-            activeOrder.IsActive = false;
+            _dbContext.Orders.Remove(activeOrder);
         }
 
         _dbContext.SaveChanges();

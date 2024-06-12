@@ -4,7 +4,7 @@ import "./CartView.css"
 import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from 'react-icons/fa';
 import { Button, Card, CardBody, CardImg, CardText, Col, Input, Row } from "reactstrap";
-import { getActiveOrderByUserId } from "../../managers/orderManager";
+import { completeOrder, getActiveOrderByUserId } from "../../managers/orderManager";
 import { deleteOrderRose, updateQuantity } from "../../managers/orderRoseManager";
 
 
@@ -43,9 +43,13 @@ export default function CartView({ loggedInUser }) {
     
         deleteOrderRose(roseId, order.id).then(() => {
             setRefresh(!refresh);
-          });
-       
+          });      
     }
+
+    const handlePurchaseButton = (orderId) => {
+        completeOrder(orderId).then(() => { navigate("/orderConfirmation")})
+    };
+    
 
     useEffect(() => {
         getAndResetOrder();
@@ -95,7 +99,7 @@ export default function CartView({ loggedInUser }) {
                         <p>Total: ${order.total}</p>
                     </div>
                     <div className="total">
-                        <Button className="purchase-btn">Purchase</Button>
+                        <Button className="purchase-btn" onClick={() => handlePurchaseButton(order.id)}>Purchase</Button>
                     </div>
                 </>
             )}

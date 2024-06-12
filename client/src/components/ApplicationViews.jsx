@@ -44,6 +44,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
+         <Route
+          path="orderConfirmation"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <>Order Confirmation</>
+            </AuthorizedRoute>
+          }
+        />
 
 
         <Route

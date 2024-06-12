@@ -59,26 +59,47 @@ public class OrderController : ControllerBase
     [Authorize]
     public IActionResult GetActiveORderByUserId(int userId)
     {
-       Order activeOrder = _dbContext.Orders
-        .Include(o => o.OrderRoses)
-        .ThenInclude(or => or.Rose).Where(o => o.IsActive == true)
-        .SingleOrDefault(o => o.UserProfileId == userId);
+        Order activeOrder = _dbContext.Orders
+         .Include(o => o.OrderRoses)
+         .ThenInclude(or => or.Rose).Where(o => o.IsActive == true)
+         .SingleOrDefault(o => o.UserProfileId == userId);
 
         if (activeOrder == null)
         {
             return Ok();
         }
-       
-       return Ok( new OrderDTO {
-        Id = activeOrder.Id,
-        UserProfileId = activeOrder.UserProfileId,
-        UserProfile = activeOrder.UserProfile,
-        IsActive = activeOrder.IsActive,
-        IsFulfilled = activeOrder.IsActive,
-        OrderRoses = activeOrder.OrderRoses,
-       });
+
+        return Ok(new OrderDTO
+        {
+            Id = activeOrder.Id,
+            UserProfileId = activeOrder.UserProfileId,
+            UserProfile = activeOrder.UserProfile,
+            IsActive = activeOrder.IsActive,
+            IsFulfilled = activeOrder.IsActive,
+            OrderRoses = activeOrder.OrderRoses,
+        });
     }
 
+    [HttpPut("complete/{orderId}")]
+    [Authorize]
+    public IActionResult CompleteOrder(int orderId)
+    {
+
+        Order orderToComplete = _dbContext.Orders
+         .SingleOrDefault(o => o.Id == orderId);
+
+        if (orderToComplete == null)
+        {
+            return NotFound("This order does not exist");
+        }
+
+        orderToComplete.IsActive = false;
+        orderToComplete.PurchaseDate = DateTime.Now;
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
 
 
 }

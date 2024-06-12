@@ -22,3 +22,12 @@ export const getActiveOrderByUserId = (userId) => {
       return response.json();
     });
 };
+
+export const completeOrder = (orderId) => {
+  return fetch(`${_apiUrl}/complete/${orderId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+};
