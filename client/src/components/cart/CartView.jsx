@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import "./CartView.css"
 import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from 'react-icons/fa';
-import { Button, Card, CardBody, CardImg, CardText, Col, Input, Row } from "reactstrap";
+import { Button, Card, CardBody, CardImg, CardText, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
 import { completeOrder, getActiveOrderByUserId } from "../../managers/orderManager";
 import { deleteOrderRose, updateQuantity } from "../../managers/orderRoseManager";
 
@@ -29,8 +29,8 @@ export default function CartView({ loggedInUser }) {
             });
     };
 
-    const handleKeepShoppingClick = () => {
-        navigate("/")
+    const handleCancelClick = () => {
+        toggleModal();
     }
 
 
@@ -46,10 +46,19 @@ export default function CartView({ loggedInUser }) {
           });      
     }
 
-    const handlePurchaseButton = (orderId) => {
+    const handlePurchaseClick = () =>
+    {    
+        toggleModal();
+    }
+
+    const handlePurchaseConfirm = (orderId) => {
         completeOrder(orderId).then(() => { navigate("/orderConfirmation")})
     };
-    
+
+    const handleKeepShoppingClick = () => {
+        navigate('/')
+    }
+
 
     useEffect(() => {
         getAndResetOrder();
@@ -99,8 +108,19 @@ export default function CartView({ loggedInUser }) {
                         <p>Total: ${order.total}</p>
                     </div>
                     <div className="total">
-                        <Button className="purchase-btn" onClick={() => handlePurchaseButton(order.id)}>Purchase</Button>
+                        <Button className="purchase-btn" onClick={handlePurchaseClick}>Purchase</Button>
                     </div>
+
+                    <Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
+                    <ModalHeader toggle={toggleModal} className="custom-modal-header">Confirmation:</ModalHeader>
+                    <ModalBody className="custom-modal-body">
+                        Would you like to continue with this purchase?
+                    </ModalBody>
+                    <ModalFooter className="custom-modal-footer">
+                        <Button className="custom-modal-button" onClick={() => handlePurchaseConfirm(order.id)}>Complete Purchase</Button>{' '}
+                        <Button className="custom-modal-button-secondary" onClick={handleCancelClick}>Cancel</Button>
+                    </ModalFooter>
+                </Modal>
                 </>
             )}
         </div>
