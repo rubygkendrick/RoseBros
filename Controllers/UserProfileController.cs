@@ -24,7 +24,7 @@ public class UserProfileController : ControllerBase
     [Authorize]
     public IActionResult GetById(int id)
     {
-        UserProfile user = _dbContext.UserProfiles
+        UserProfile user = _dbContext.UserProfiles.Include(up => up.Orders).ThenInclude(o => o.OrderRoses).ThenInclude(or => or.Rose)
         .SingleOrDefault(up => up.Id == id);
 
         if (user == null)
@@ -33,7 +33,7 @@ public class UserProfileController : ControllerBase
         }
 
         List<Order> orders = _dbContext.Orders.Where(o => o.UserProfileId == id).ToList();
-        
+
         return Ok(new UserProfileWithOrdersDTO
        {
                 Id = user.Id,
