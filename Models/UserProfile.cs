@@ -32,6 +32,7 @@ public class UserProfile
     [NotMapped]
     public List<string> Roles { get; set; }
 
+
     public string IdentityUserId { get; set; }
 
     public IdentityUser IdentityUser { get; set; }
