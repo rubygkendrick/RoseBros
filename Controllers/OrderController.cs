@@ -66,11 +66,17 @@ public class OrderController : ControllerBase
 
         if (activeOrder == null)
         {
-            return NotFound("There is no active order for this user");
+            return NotFound("There is no active order for this user, their cart is empty");
         }
-
         //change this to return a DTO 
-       return Ok(activeOrder);
+       return Ok( new OrderDTO {
+        Id = activeOrder.Id,
+        UserProfileId = activeOrder.UserProfileId,
+        UserProfile = activeOrder.UserProfile,
+        IsActive = activeOrder.IsActive,
+        IsFulfilled = activeOrder.IsActive,
+        OrderRoses = activeOrder.OrderRoses,
+       });
     }
 
 
