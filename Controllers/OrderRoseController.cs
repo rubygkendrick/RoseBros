@@ -108,6 +108,13 @@ public class OrderRoseController : ControllerBase
 
         _dbContext.OrderRoses.Remove(roseToDelete);
         _dbContext.SaveChanges();
+       
+        if (!activeOrder.OrderRoses.Any())
+        {
+            activeOrder.IsActive = false;
+        }
+
+        _dbContext.SaveChanges();
 
         return NoContent();
     }

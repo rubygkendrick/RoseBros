@@ -44,7 +44,7 @@ export default function CartView({ loggedInUser }) {
         deleteOrderRose(roseId, order.id).then(() => {
             setRefresh(!refresh);
           });
-        console.log(roseId, order.id)
+       
     }
 
     useEffect(() => {
