@@ -6,6 +6,8 @@ import Register from "./auth/Register";
 import AllRoses from "./rose/AllRoses";
 import RoseDetails from "./rose/RoseDetails";
 import CartView from "./cart/CartView";
+import OrderConfirmation from "./OrderConfirmation";
+import ProfileView from "./ProfileView";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -40,7 +42,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="userProfile"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <>Profile View</>
+              <ProfileView loggedInUser={loggedInUser}/>
             </AuthorizedRoute>
           }
         />
@@ -48,7 +50,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="orderConfirmation"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <>Order Confirmation</>
+              <OrderConfirmation loggedInUser={loggedInUser}/>
             </AuthorizedRoute>
           }
         />
