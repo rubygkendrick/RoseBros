@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from 'react-icons/fa';
 import { Button, Card, CardBody, CardImg, CardText, Col, Input, Row } from "reactstrap";
 import { getActiveOrderByUserId } from "../../managers/orderManager";
+import { updateQuantity } from "../../managers/orderRoseManager";
 
 
 
 // eslint-disable-next-line react/prop-types
 export default function CartView({ loggedInUser }) {
     const [order, setOrder] = useState([]);
+    const [refresh , setRefresh] = useState(false);
     const [modal, setModal] = useState(false);
     const [orderEmpty, setOrderEmpty] = useState(false);
 
@@ -30,11 +32,16 @@ export default function CartView({ loggedInUser }) {
     const handleKeepShoppingClick = () => {
         navigate("/")
     }
+ 
 
+    const handleQuantityChange = (event) => {
+       const newQty = parseInt(event.target.value)
+        updateQuantity(newQty, parseInt(event.target.id) , loggedInUser.id).then(() => {setRefresh(!refresh)})
+    };
 
     useEffect(() => {
         getAndResetOrder();
-    }, []);
+    }, [refresh]);
 
     return (
         <div>
@@ -62,6 +69,8 @@ export default function CartView({ loggedInUser }) {
                                         <Input
                                             type="number"
                                             defaultValue={orderRose.quantity}
+                                            id = {orderRose.roseId}
+                                            onChange={handleQuantityChange}
                                             className="quantity-input"
                                         />
                                     </Col>
