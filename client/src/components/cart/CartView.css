@@ -1,63 +1,88 @@
-.custom-card {
-    width: 666px;
-    margin-top: 100px;
-    /* this is for the RoseDetails Card */
-  }
-  
-  .custom-card img {
-    width: 100%;
+
+
+.order-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 5rem;
+}
+
+.order-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-width: 600px; /* Set a max-width to control the width of the card */
+    width: 100%; /* Ensure the card takes up the full width up to the max-width */
+}
+
+.order-card-img {
+    max-width: 100%;
     height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.card-padding-bottom {
+    padding-bottom: 0.5rem;
+}
+
+.quantity-input {
+    width: 60px; /* Adjust the width as needed */
+    margin-right: 10px;
+}
+
+.quantity-text {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.trash-icon {
+    color: black;
+    background: transparent; /* Ensure the background is transparent */
+    border: none; /* Remove any default border */
+    cursor: pointer; /* Change cursor to pointer for better UX */
+}
+.btn {
+    background-color: #bfbcbc6d;
+    border-color: #817f7f6d;
+    margin-right: 1rem;
   }
-  
-  .price-tag {
-    margin-top: 100px;
-  }
-  
-  .qty-input {
-    margin-top: 20px;
-  }
-  
-  
-  
-  .custom-modal {
-    background-color: #333333;
-    color: #ffffff;
-    padding: 20px;
-  }
-  
-  .custom-modal-header {
-    background-color: #565656;
-    color: #ffffff;
-    border-bottom: none; 
-   
-  }
-  
-  .custom-modal-footer {
-    background-color: #565656;
-    color: #ffffff; 
-    border-top: none;
-  }
-  
-  .custom-modal-body {
-    background-color: #565656;
-    color: #ffffff;
-  
-  }
-  
-  .custom-modal-button {
+
+  .btn:hover {
     background-color: #700000;
+  
+  }
+
+  .total {
+    margin-top: 3rem;
+    font-weight: bold;
     color: #ffffff;
+    font-size: 20px; 
   }
+
+  .purchase-btn {
+    background-color: #bfbcbc6d;
+    border-color: #817f7f6d;
+    margin-top: 1rem;
+  }
+
+  .purchase-btn:hover {
+    background-color: #700000;
   
-  .custom-modal-button:hover {
-    background-color: #121212;
   }
-  
-  .custom-modal-button-secondary {
-    background-color: #2322226d;
-    color: #ffffff;
-  }
-  
-  .custom-modal-button-secondary:hover {
-    background-color: #121212;
-  }
+
+
+.rose-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 18px; 
+}
+
+
+.price {
+    font-weight: bold;
+    color: #555;
+    font-size: 14px; 
+}

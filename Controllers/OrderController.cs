@@ -68,7 +68,7 @@ public class OrderController : ControllerBase
         {
             return NotFound("There is no active order for this user, their cart is empty");
         }
-        //change this to return a DTO 
+       
        return Ok( new OrderDTO {
         Id = activeOrder.Id,
         UserProfileId = activeOrder.UserProfileId,

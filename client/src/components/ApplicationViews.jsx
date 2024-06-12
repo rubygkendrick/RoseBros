@@ -5,6 +5,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import AllRoses from "./rose/AllRoses";
 import RoseDetails from "./rose/RoseDetails";
+import CartView from "./cart/CartView";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -31,7 +32,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="cart"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <>Cart View </>
+              <CartView loggedInUser={loggedInUser}/>
             </AuthorizedRoute>
           }
         />
