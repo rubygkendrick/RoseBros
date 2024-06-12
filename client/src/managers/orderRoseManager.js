@@ -25,4 +25,13 @@ export const newOrderRose = (orderRose, userId) => {
       },
     })
   };
+
+  export const deleteOrderRose = (roseId, orderId) => {
+    return fetch(`${_apiUrl}/delete?roseId=${roseId}&orderId=${orderId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
   

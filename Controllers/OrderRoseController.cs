@@ -67,10 +67,11 @@ public class OrderRoseController : ControllerBase
         {
             return NotFound("This order does not exist");
         }
-       
+
         OrderRose roseToUpdate = activeOrder.OrderRoses.SingleOrDefault(or => or.RoseId == roseId);
 
-        if(roseToUpdate == null) {
+        if (roseToUpdate == null)
+        {
 
             return NotFound("This rose doesnt seem to be in your cart");
         }
@@ -82,6 +83,35 @@ public class OrderRoseController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpDelete("delete")]
+    [Authorize]
+    public IActionResult DeleteOrderRose([FromQuery] int roseId, [FromQuery] int orderId)
+    {
+        Order activeOrder = _dbContext.Orders
+          .Include(o => o.OrderRoses)
+          .SingleOrDefault(o => o.Id == orderId);
+
+        if (activeOrder == null)
+        {
+            return NotFound("This order does not exist");
+        }
+
+        OrderRose roseToDelete = activeOrder.OrderRoses.SingleOrDefault(or => or.RoseId == roseId);
+
+        if (roseToDelete == null)
+        {
+
+            return NotFound("This rose does not seem to be in your cart");
+        }
+
+
+        _dbContext.OrderRoses.Remove(roseToDelete);
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
+
 
 
 

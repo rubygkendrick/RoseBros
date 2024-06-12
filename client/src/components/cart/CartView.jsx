@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from 'react-icons/fa';
 import { Button, Card, CardBody, CardImg, CardText, Col, Input, Row } from "reactstrap";
 import { getActiveOrderByUserId } from "../../managers/orderManager";
-import { updateQuantity } from "../../managers/orderRoseManager";
+import { deleteOrderRose, updateQuantity } from "../../managers/orderRoseManager";
 
 
 
 // eslint-disable-next-line react/prop-types
 export default function CartView({ loggedInUser }) {
     const [order, setOrder] = useState([]);
-    const [refresh , setRefresh] = useState(false);
+    const [refresh, setRefresh] = useState(false);
     const [modal, setModal] = useState(false);
     const [orderEmpty, setOrderEmpty] = useState(false);
 
@@ -28,16 +28,24 @@ export default function CartView({ loggedInUser }) {
                 }
             });
     };
-    
+
     const handleKeepShoppingClick = () => {
         navigate("/")
     }
- 
+
 
     const handleQuantityChange = (event) => {
-       const newQty = parseInt(event.target.value)
-        updateQuantity(newQty, parseInt(event.target.id) , loggedInUser.id).then(() => {setRefresh(!refresh)})
+        const newQty = parseInt(event.target.value)
+        updateQuantity(newQty, parseInt(event.target.id), loggedInUser.id).then(() => { setRefresh(!refresh) })
     };
+
+    const handleOrderRoseDelete = (roseId) => {
+    
+        deleteOrderRose(roseId, order.id).then(() => {
+            setRefresh(!refresh);
+          });
+        console.log(roseId, order.id)
+    }
 
     useEffect(() => {
         getAndResetOrder();
@@ -45,10 +53,10 @@ export default function CartView({ loggedInUser }) {
 
     return (
         <div>
-            {orderEmpty === true ? (
+            {orderEmpty === true  ? (
                 <>
-                <p className="empty-cart">Uh oh! Your cart is empty</p>
-                <Button className="purchase-btn" onClick={handleKeepShoppingClick}>Keep Shopping</Button>
+                    <p className="empty-cart">Uh oh! Your cart is empty</p>
+                    <Button className="purchase-btn" onClick={handleKeepShoppingClick}>Keep Shopping</Button>
                 </>
             ) : (
                 <>
@@ -69,13 +77,13 @@ export default function CartView({ loggedInUser }) {
                                         <Input
                                             type="number"
                                             defaultValue={orderRose.quantity}
-                                            id = {orderRose.roseId}
+                                            id={orderRose.roseId}
                                             onChange={handleQuantityChange}
                                             className="quantity-input"
                                         />
                                     </Col>
                                     <Col xs="4" sm="3" md="2">
-                                        <Button className="btn">
+                                        <Button className="btn" onClick={() => handleOrderRoseDelete(orderRose.roseId)}>
                                             <FaTrashAlt className="trash-icon" />
                                         </Button>
                                     </Col>
