@@ -86,3 +86,8 @@
     color: #555;
     font-size: 14px; 
 }
+
+.empty-cart{
+    margin-top: 5rem;
+    text-align: center;
+}

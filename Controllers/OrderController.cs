@@ -66,7 +66,7 @@ public class OrderController : ControllerBase
 
         if (activeOrder == null)
         {
-            return NotFound("There is no active order for this user, their cart is empty");
+            return Ok();
         }
        
        return Ok( new OrderDTO {
