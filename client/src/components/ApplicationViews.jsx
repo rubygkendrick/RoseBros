@@ -5,6 +5,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import AllRoses from "./rose/AllRoses";
 import RoseDetails from "./rose/RoseDetails";
+import CartView from "./cart/CartView";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -20,7 +21,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           }
         />
          <Route
-          path="/rose/:id"
+          path="rose/:id"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
               <RoseDetails loggedInUser={loggedInUser}/>
@@ -31,7 +32,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="cart"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <>Cart View </>
+              <CartView loggedInUser={loggedInUser}/>
             </AuthorizedRoute>
           }
         />
@@ -40,6 +41,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
               <>Profile View</>
+            </AuthorizedRoute>
+          }
+        />
+         <Route
+          path="orderConfirmation"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <>Order Confirmation</>
             </AuthorizedRoute>
           }
         />

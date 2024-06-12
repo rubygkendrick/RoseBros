@@ -15,3 +15,23 @@ export const newOrderRose = (orderRose, userId) => {
         }   
       });
   };
+
+
+  export const updateQuantity = (qty, roseId , userId) => {
+    return fetch(`${_apiUrl}/updateQuantity?qty=${qty}&roseId=${roseId}&userId=${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+  };
+
+  export const deleteOrderRose = (roseId, orderId) => {
+    return fetch(`${_apiUrl}/delete?roseId=${roseId}&orderId=${orderId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+  
