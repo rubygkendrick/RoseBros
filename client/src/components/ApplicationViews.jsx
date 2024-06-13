@@ -8,6 +8,7 @@ import RoseDetails from "./rose/RoseDetails";
 import CartView from "./cart/CartView";
 import OrderConfirmation from "./OrderConfirmation";
 import ProfileView from "./ProfileView";
+import Whoops from "./Whoops";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -65,7 +66,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           element={<Register setLoggedInUser={setLoggedInUser} />}
         />
       </Route>
-      <Route path="*" element={<p>Whoops, nothing here...</p>} />
+      <Route path="*" element={<Whoops/>} />
     </Routes>
   );
 }

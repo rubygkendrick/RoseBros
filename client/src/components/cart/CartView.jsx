@@ -36,23 +36,29 @@ export default function CartView({ loggedInUser }) {
 
     const handleQuantityChange = (event) => {
         const newQty = parseInt(event.target.value)
+        if ( newQty <= 0 || isNaN(newQty)) {
+            window.alert("You must enter a valid quantity (a non-negative number).");
+            return;
+        }
         updateQuantity(newQty, parseInt(event.target.id), loggedInUser.id).then(() => { setRefresh(!refresh) })
     };
 
     const handleOrderRoseDelete = (roseId) => {
-    
+
         deleteOrderRose(roseId, order.id).then(() => {
             setRefresh(!refresh);
-          });      
+        });
     }
 
-    const handlePurchaseClick = () =>
-    {    
+    const handlePurchaseClick = () => {
         toggleModal();
     }
 
     const handlePurchaseConfirm = (orderId) => {
-        completeOrder(orderId).then(() => { navigate("/orderConfirmation")})
+        completeOrder(orderId).then(() => {
+            sessionStorage.setItem('recentPurchase', 'true');
+            navigate("/orderConfirmation")
+        })
     };
 
     const handleKeepShoppingClick = () => {
@@ -66,10 +72,10 @@ export default function CartView({ loggedInUser }) {
 
     return (
         <div>
-            {orderEmpty === true  ? (
+            {orderEmpty === true ? (
                 <>
                     <p className="empty-cart">Uh oh! Your cart is empty</p>
-                    <Button className="purchase-btn" onClick={handleKeepShoppingClick}>Keep Shopping</Button>
+                    <Button className="purchase-btn" onClick={handleKeepShoppingClick}>Start Shopping</Button>
                 </>
             ) : (
                 <>
@@ -89,6 +95,8 @@ export default function CartView({ loggedInUser }) {
                                     <Col xs="4" sm="3" md="2">
                                         <Input
                                             type="number"
+                                            min="1"
+                                            max="100"
                                             defaultValue={orderRose.quantity}
                                             id={orderRose.roseId}
                                             onChange={handleQuantityChange}
@@ -112,15 +120,15 @@ export default function CartView({ loggedInUser }) {
                     </div>
 
                     <Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
-                    <ModalHeader toggle={toggleModal} className="custom-modal-header">Confirmation:</ModalHeader>
-                    <ModalBody className="custom-modal-body">
-                        Would you like to continue with this purchase?
-                    </ModalBody>
-                    <ModalFooter className="custom-modal-footer">
-                        <Button className="custom-modal-button" onClick={() => handlePurchaseConfirm(order.id)}>Complete Purchase</Button>{' '}
-                        <Button className="custom-modal-button-secondary" onClick={handleCancelClick}>Cancel</Button>
-                    </ModalFooter>
-                </Modal>
+                        <ModalHeader toggle={toggleModal} className="custom-modal-header">Confirmation:</ModalHeader>
+                        <ModalBody className="custom-modal-body">
+                            Would you like to continue with this purchase?
+                        </ModalBody>
+                        <ModalFooter className="custom-modal-footer">
+                            <Button className="custom-modal-button" onClick={() => handlePurchaseConfirm(order.id)}>Complete Purchase</Button>{' '}
+                            <Button className="custom-modal-button-secondary" onClick={handleCancelClick}>Cancel</Button>
+                        </ModalFooter>
+                    </Modal>
                 </>
             )}
         </div>

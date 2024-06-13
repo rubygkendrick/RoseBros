@@ -23,7 +23,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
     return (
         <div>
             <Navbar className="navbar solid-navbar" light fixed="top" expand="lg">
-                <NavbarBrand className="navbar-brand" tag={RRNavLink} to="/">
+                <NavbarBrand className="nav-item" style={{ fontSize: '1.5rem' }} tag={RRNavLink} to="/">
                     RoseBros
                 </NavbarBrand>
                 {loggedInUser ? (
