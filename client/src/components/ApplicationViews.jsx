@@ -9,6 +9,9 @@ import CartView from "./cart/CartView";
 import OrderConfirmation from "./OrderConfirmation";
 import ProfileView from "./ProfileView";
 import Whoops from "./Whoops";
+import AddInventory from "./adminViews/AddInventory";
+
+
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -59,7 +62,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="add-inventory"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
-              <>Create a new Rose</>
+              <AddInventory/>
             </AuthorizedRoute>
           }
         />
