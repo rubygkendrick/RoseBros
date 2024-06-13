@@ -19,15 +19,15 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           index
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <AllRoses/>
+              <AllRoses />
             </AuthorizedRoute>
           }
         />
-         <Route
+        <Route
           path="rose/:id"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <RoseDetails loggedInUser={loggedInUser}/>
+              <RoseDetails loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }
         />
@@ -35,7 +35,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="cart"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <CartView loggedInUser={loggedInUser}/>
+              <CartView loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }
         />
@@ -43,15 +43,23 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="userProfile"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <ProfileView loggedInUser={loggedInUser}/>
+              <ProfileView loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }
         />
-         <Route
+        <Route
           path="orderConfirmation"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
-              <OrderConfirmation loggedInUser={loggedInUser}/>
+              <OrderConfirmation loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="add-inventory"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
+              <>Create a new Rose</>
             </AuthorizedRoute>
           }
         />
@@ -66,7 +74,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           element={<Register setLoggedInUser={setLoggedInUser} />}
         />
       </Route>
-      <Route path="*" element={<Whoops/>} />
+      <Route path="*" element={<Whoops />} />
     </Routes>
   );
 }

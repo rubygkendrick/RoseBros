@@ -26,12 +26,20 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                 <NavbarBrand className="nav-item" style={{ fontSize: '1.5rem' }} tag={RRNavLink} to="/">
                     RoseBros
                 </NavbarBrand>
+
                 {loggedInUser ? (
                     <>
                         <NavbarToggler onClick={toggleNavbar} />
                         <Collapse isOpen={open} navbar>
                             <Nav navbar></Nav>
                         </Collapse>
+                        {loggedInUser.roles.includes("Admin") && (
+                          
+                                <NavLink className="nav-item" tag={RRNavLink} to="/addInventory">
+                                    Add Inventory
+                                </NavLink>
+                          
+                        )}
                         <NavLink className="nav-item" tag={RRNavLink} to="/cart">
                             Cart
                         </NavLink>
@@ -55,6 +63,8 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                             Logout
                         </Button>
                     </>
+
+
                 ) : (
                     <Nav navbar>
                         <NavItem>
@@ -64,6 +74,7 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                         </NavItem>
                     </Nav>
                 )}
+
             </Navbar>
         </div>
     );
