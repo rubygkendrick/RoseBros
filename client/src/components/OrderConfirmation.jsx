@@ -19,21 +19,19 @@ export default function OrderConfirmation({ loggedInUser }) {
         getAndSetUser();
     }, []);
 
-    useEffect(() => {
-        if (user.orders && user.orders.length > 0) {
-            const hasRecentPurchase = user.orders.some(order => {
-                const purchaseDate = moment(order.purchaseDate);
-                const today = moment().startOf('day');
-                return purchaseDate.isSame(today, 'day');
-            });
 
-            if (!hasRecentPurchase) {
-                navigate('/notAllowed');
-            }
+    useEffect(() => {
+        // Check if the recent purchase flag is set
+        const recentPurchase = sessionStorage.getItem('recentPurchase');
+
+        if (recentPurchase === 'true') {
+            // Remove the flag after checking
+            sessionStorage.removeItem('recentPurchase');
         } else {
-            navigate('/notAllowed'); // Navigate to profile if there are no orders
+            // If no recent purchase, redirect to not allowed page
+            navigate('/notAllowed');
         }
-    }, [user, navigate]);
+    }, [navigate]);
 
     return (
         <>

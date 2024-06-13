@@ -88,8 +88,7 @@ export default function RoseDetails({loggedInUser}) {
             </div>
 
             <div className="qty-input">
-                <label>Quantity:</label>
-                <label htmlFor="quantity">Quantity:</label>
+                <label htmlFor="quantity">Quantity: </label>
                 <input
                     type="number"
                     id="quantity"
