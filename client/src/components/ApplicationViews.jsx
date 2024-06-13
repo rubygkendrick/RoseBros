@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Route, Routes } from "react-router-dom";
 
 import { AuthorizedRoute } from "./auth/AuthorizedRoute";
@@ -62,7 +63,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="add-inventory"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
-              <AddInventory/>
+              <AddInventory loggedInUser={loggedInUser} roles={["Admin"]}/>
             </AuthorizedRoute>
           }
         />

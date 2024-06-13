@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
@@ -5,20 +6,22 @@ import "./AddInventory.css";
 
 import { getColors } from "../../managers/colorManager";
 import { getHabits } from "../../managers/habitManager";
+import { addRose } from "../../managers/roseManager";
 
 
-export default function AddInventory({ loggedInUser }) {
+export default function AddInventory() {
     const [roseName, setRoseName] = useState("");
     const [description, setDescription] = useState("");
     const [image, setRoseImage] = useState("");
     const [colorId, setColorId] = useState("");
     const [habitId, setHabitId] = useState("")
     const [pricePerUnit, setPricePerUnit] = useState(0);
-    const [errors, setErrors] = useState(false);
+    const [errors, setErrors] = useState(false)
     const [colors, setColors] = useState([]);
     const [habits, setHabits] = useState([]);
 
     const navigate = useNavigate();
+
 
     const getAndSetColors = () => {
         getColors().then(setColors);
@@ -44,13 +47,13 @@ export default function AddInventory({ loggedInUser }) {
             pricePerUnit: parseFloat(pricePerUnit)
         };
 
-        // addRose(newRose).then((res) => {
-        //     if (res.errors) {
-        //         setErrors(res.errors);
-        //     } else {
-        //         navigate("/");
-        //     }
-        // })
+        addRose(newRose).then((res) => {
+            if (res.errors) {
+                setErrors(res.errors);
+            } else {
+                navigate("/");
+            }
+        })
     };
 
     return (
@@ -62,6 +65,7 @@ export default function AddInventory({ loggedInUser }) {
                     </p>
                 ))}
             </div>
+
             <Form className="form-body">
                 <FormGroup>
                     <Label>Rose Name</Label>
@@ -83,7 +87,7 @@ export default function AddInventory({ loggedInUser }) {
                         defaultValue=""
                         onChange={(e) => setColorId(e.target.value)}
                     >
-                        <option value="">Select a color</option>
+                        <option value="">select a color</option>
                         {colors.map((color) => (
                             <option key={color.id} value={color.id}>
                                 {color.name}
@@ -100,7 +104,7 @@ export default function AddInventory({ loggedInUser }) {
                         value={habitId}
                         onChange={(e) => setHabitId(e.target.value)}
                     >
-                        <option value="">Select a habit</option>
+                        <option value="">select a habit</option>
                         {habits.map((habit) => (
                             <option key={habit.id} value={habit.id}>
                                 {habit.name}
@@ -114,7 +118,7 @@ export default function AddInventory({ loggedInUser }) {
                         type="textarea"
                         className="input-field"
                         id="description"
-                        rows="6" 
+                        rows="6"
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </FormGroup>
