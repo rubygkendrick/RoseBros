@@ -36,6 +36,10 @@ export default function CartView({ loggedInUser }) {
 
     const handleQuantityChange = (event) => {
         const newQty = parseInt(event.target.value)
+        if ( newQty <= 0 || isNaN(newQty)) {
+            window.alert("You must enter a valid quantity (a non-negative number).");
+            return;
+        }
         updateQuantity(newQty, parseInt(event.target.id), loggedInUser.id).then(() => { setRefresh(!refresh) })
     };
 
@@ -91,6 +95,8 @@ export default function CartView({ loggedInUser }) {
                                     <Col xs="4" sm="3" md="2">
                                         <Input
                                             type="number"
+                                            min="1"
+                                            max="100"
                                             defaultValue={orderRose.quantity}
                                             id={orderRose.roseId}
                                             onChange={handleQuantityChange}
