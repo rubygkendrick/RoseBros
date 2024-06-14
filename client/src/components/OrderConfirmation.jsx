@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import moment from 'moment';
 import "./OrderConfirmation.css";
 import { getUserById } from '../managers/userManager';
 

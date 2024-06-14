@@ -10,15 +10,14 @@ public class Rose
     [Required]
     [MaxLength(150)]
     public string Name { get; set; }
+    public Habit? Habit { get; set; }
+    public Color? Color { get; set; }
 
     [Required]
     public int ColorId { get; set; }
 
-    public Color Color { get; set; }
-
     [Required]
     public int HabitId { get; set; }
-    public Habit Habit { get; set; }
 
     [Required]
     public string Description { get; set; }
@@ -26,6 +25,8 @@ public class Rose
     public string Image { get; set; }
     [Required]
     public decimal PricePerUnit { get; set; }
-     public List<OrderRose> OrderRoses { get; set; }
+
+    public List<OrderRose>? OrderRoses { get; set; }
+
 
 }
