@@ -83,7 +83,7 @@ public class RoseController : ControllerBase
     }
 
     [HttpPost("add")]
-    //[Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin")]
     public IActionResult AddRose(Rose newRose)
     {
 
