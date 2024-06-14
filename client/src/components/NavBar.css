@@ -7,7 +7,7 @@
 
 .navbar-brand:hover
 {
-  color: #700000; /* Red color on hover or focus */
+  color: #990303; /* Red color on hover or focus */
 }
 
 
@@ -24,7 +24,7 @@
 }
 
 .nav-item:hover {
-  color: #700000;
+  color: #990303;
 
 }
 
@@ -35,7 +35,7 @@
 }
 
 .custom-btn-nav:hover {
-  background-color: #700000;
+  background-color: #990303;
 
 }
 
