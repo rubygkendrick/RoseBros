@@ -63,9 +63,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
 }
 
 app.UseHttpsRedirection();
+
+
 // these two calls are required to add auth to the pipeline for a request
 app.UseAuthentication();
 app.UseAuthorization();
@@ -73,5 +76,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
 
