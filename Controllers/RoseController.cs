@@ -84,50 +84,105 @@ public class RoseController : ControllerBase
 
     [HttpPost("add")]
     [Authorize(Roles = "Admin")]
-    public IActionResult AddRose(Rose newRose)
+    public async Task<IActionResult> AddRose([FromForm] IFormFile image, [FromForm] string name,
+    [FromForm] int colorId, [FromForm] int habitId, [FromForm] string description, [FromForm] int pricePerUnit)
     {
-
-        if (newRose == null)
+        if (image == null || image.Length == 0 || string.IsNullOrEmpty(name))
         {
             return BadRequest("The rose you are trying to add is null or has incomplete information");
         }
 
-        var existingRose = _dbContext.Roses.FirstOrDefault(r => r.Name == newRose.Name);
+        var existingRose = _dbContext.Roses.FirstOrDefault(r => r.Name == name);
 
-
-        var color = _dbContext.Colors.Find(newRose.ColorId);
-        var habit = _dbContext.Habits.Find(newRose.HabitId);
+        var color = _dbContext.Colors.Find(colorId);
+        var habit = _dbContext.Habits.Find(habitId);
 
         if (color == null || habit == null)
         {
             return BadRequest("Invalid ColorId or HabitId");
         }
 
-        if (existingRose == null)
-        {
-            var roseToAdd = new Rose
-            {
-                Name = newRose.Name,
-                ColorId = newRose.ColorId,
-                Color = color,
-                HabitId = newRose.HabitId,
-                Habit = habit,
-                Description = newRose.Description,
-                Image = newRose.Image,
-                PricePerUnit = newRose.PricePerUnit,
-            };
-
-            _dbContext.Roses.Add(roseToAdd);
-            _dbContext.SaveChanges();
-
-            return Ok(roseToAdd);
-        }
-        else
+        if (existingRose != null)
         {
             return BadRequest("A Rose with this name already exists in the database");
         }
 
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "client", "public", "uploads");
+        if (!Directory.Exists(uploadsFolder))
+        {
+            Directory.CreateDirectory(uploadsFolder);
+        }
+
+        var filePath = Path.Combine(uploadsFolder, image.FileName);
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await image.CopyToAsync(stream);
+        }
+
+        var roseToAdd = new Rose
+        {
+            Name = name,
+            ColorId = colorId,
+            Color = color,
+            HabitId = habitId,
+            Habit = habit,
+            Description = description,
+            Image = $"/uploads/{image.FileName}", // Save the relative path
+            PricePerUnit = pricePerUnit,
+        };
+
+        _dbContext.Roses.Add(roseToAdd);
+        _dbContext.SaveChanges();
+
+        return Ok(roseToAdd);
     }
 
-
+    //[HttpPost("add")]
+    //[Authorize(Roles = "Admin")]
+    //public IActionResult AddRose(Rose newRose)
+    //{
+    //
+    //    if (newRose == null)
+    //    {
+    //        return BadRequest("The rose you are trying to add is null or has incomplete information");
+    //    }
+    //
+    //    var existingRose = _dbContext.Roses.FirstOrDefault(r => r.Name == newRose.Name);
+    //
+    //
+    //    var color = _dbContext.Colors.Find(newRose.ColorId);
+    //    var habit = _dbContext.Habits.Find(newRose.HabitId);
+    //
+    //    if (color == null || habit == null)
+    //    {
+    //        return BadRequest("Invalid ColorId or HabitId");
+    //    }
+    //
+    //    if (existingRose == null)
+    //    {
+    //        var roseToAdd = new Rose
+    //        {
+    //            Name = newRose.Name,
+    //            ColorId = newRose.ColorId,
+    //            Color = color,
+    //            HabitId = newRose.HabitId,
+    //            Habit = habit,
+    //            Description = newRose.Description,
+    //            Image = newRose.Image,
+    //            PricePerUnit = newRose.PricePerUnit,
+    //        };
+    //
+    //        _dbContext.Roses.Add(roseToAdd);
+    //        _dbContext.SaveChanges();
+    //
+    //        return Ok(roseToAdd);
+    //    }
+    //    else
+    //    {
+    //        return BadRequest("A Rose with this name already exists in the database");
+    //    }
+    //
+    //}
+    //
+    //
 }

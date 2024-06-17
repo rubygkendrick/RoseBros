@@ -1,35 +1,31 @@
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import "./AddInventory.css";
-
 import { getColors } from "../../managers/colorManager";
 import { getHabits } from "../../managers/habitManager";
 import { addRose } from "../../managers/roseManager";
 
-
 export default function AddInventory() {
     const [roseName, setRoseName] = useState("");
     const [description, setDescription] = useState("");
-    const [image, setRoseImage] = useState("");
+    const [image, setRoseImage] = useState(null); // Change to handle file
     const [colorId, setColorId] = useState("");
-    const [habitId, setHabitId] = useState("")
+    const [habitId, setHabitId] = useState("");
     const [pricePerUnit, setPricePerUnit] = useState(0);
-    const [errors, setErrors] = useState(false)
+    const [errors, setErrors] = useState(false);
     const [colors, setColors] = useState([]);
     const [habits, setHabits] = useState([]);
 
     const navigate = useNavigate();
 
-
     const getAndSetColors = () => {
         getColors().then(setColors);
-    }
+    };
 
     const getAndSetHabits = () => {
         getHabits().then(setHabits);
-    }
+    };
 
     useEffect(() => {
         getAndSetColors();
@@ -38,22 +34,21 @@ export default function AddInventory() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newRose = {
-            name: roseName,
-            colorId: parseInt(colorId),
-            habitId: parseInt(habitId),
-            description: description,
-            image: image,
-            pricePerUnit: parseFloat(pricePerUnit)
-        };
+        const formData = new FormData();
+        formData.append("name", roseName);
+        formData.append("colorId", parseInt(colorId));
+        formData.append("habitId", parseInt(habitId));
+        formData.append("description", description);
+        formData.append("image", image); // Append file
+        formData.append("pricePerUnit", parseInt(pricePerUnit));
 
-        addRose(newRose).then((res) => {
+        addRose(formData).then((res) => {
             if (res.errors) {
                 setErrors(res.errors);
             } else {
                 navigate("/");
             }
-        })
+        });
     };
 
     return (
@@ -66,16 +61,14 @@ export default function AddInventory() {
                 ))}
             </div>
 
-            <Form className="form-body">
+            <Form className="form-body" onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label>Rose Name</Label>
                     <Input
                         className="input-field"
                         type="text"
                         defaultValue=""
-                        onChange={(e) => {
-                            setRoseName(e.target.value);
-                        }}
+                        onChange={(e) => setRoseName(e.target.value)}
                     />
                 </FormGroup>
                 <FormGroup>
@@ -123,16 +116,16 @@ export default function AddInventory() {
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label for="image">Image URL</Label>
+                    <Label for="image">Image</Label>
                     <Input
-                        type="text"
+                        type="file"
                         className="input-field"
                         id="image"
-                        onChange={(e) => setRoseImage(e.target.value)}
+                        onChange={(e) => setRoseImage(e.target.files[0])} // Handle file input
                     />
                 </FormGroup>
                 <FormGroup>
-                    <Label for="image">Price Per Bareroot</Label>
+                    <Label for="pricePerUnit">Price Per Bareroot</Label>
                     <Input
                         type="text"
                         className="input-field"
@@ -141,12 +134,11 @@ export default function AddInventory() {
                     />
                 </FormGroup>
 
-                <Button onClick={handleSubmit} className="custom-btn submit">
+                <Button type="submit" className="custom-btn submit">
                     Submit
                 </Button>
             </Form>
-
-
         </>
     );
 }
+
