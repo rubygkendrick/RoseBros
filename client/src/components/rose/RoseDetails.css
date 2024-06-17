@@ -61,3 +61,8 @@
 .custom-modal-button-secondary:hover {
   background-color: #121212;
 }
+
+.outOfStock {
+  margin-top: 3rem;
+  color: rgb(182, 0, 0)
+}

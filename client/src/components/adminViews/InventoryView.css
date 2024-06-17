@@ -95,3 +95,14 @@
 .add-btn {
     margin-top: 4rem;
 }
+.add-btn:hover {
+    background-color: green;
+}
+
+.in-stock-btn{
+    background-color: green;
+}
+
+.in-stock-btn:hover{
+    background-color: #333;
+}

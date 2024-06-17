@@ -19,9 +19,9 @@ export default function AllRoses({ loggedInUser, setLoggedInUser, roles }) {
         getAndResetAllRoses();
     }, []);
 
-  
 
-   
+
+
 
     return (
         <>
@@ -31,14 +31,16 @@ export default function AllRoses({ loggedInUser, setLoggedInUser, roles }) {
                     return (
                         <Col sm="12" md="6" lg="4" key={rose.id}>
                             <Card className="my-3">
-                                <CardImg top width="100%" 
-                                src={`${rose.image}?${new Date().getTime()}`} alt={rose.name} />
+                                <CardImg top width="100%"
+                                    src={`${rose.image}?${new Date().getTime()}`} alt={rose.name} />
                                 <CardBody className="card-padding-bottom">
                                     <Link to={`/rose/${rose.id}`} className="rose-title">
                                         <CardTitle tag="h2">{rose.name}</CardTitle>
                                     </Link>
                                     <CardText>{rose.habit?.name} Rose</CardText>
-                                    <CardText>${rose.pricePerUnit} per bareroot</CardText>
+                                    {rose.outOfStock ? 
+                                    <CardText className="out-of-stock">Out of Stock</CardText> :
+                                    <CardText>${rose.pricePerUnit} per bareroot</CardText>}
                                 </CardBody>
                             </Card>
                         </Col>

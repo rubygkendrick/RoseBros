@@ -49,7 +49,7 @@ export default function InventoryView({ loggedInUser }) {
                                         </CardBody>
                                     </Col>
                                     <Col xs="4" sm="3" md="2">
-                                        {rose.outOfStock ? <Button>In Stock</Button> : 
+                                        {rose.outOfStock ? <Button className="in-stock-btn">Back In Stock</Button> : 
                                         <Button>Out Of Stock</Button> }
                                        
                                     </Col>

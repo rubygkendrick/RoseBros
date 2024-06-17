@@ -10,3 +10,7 @@
     background-color: #990303;
   }
 
+.out-of-stock {
+  color: #d10404;
+  font-size: larger;
+}
