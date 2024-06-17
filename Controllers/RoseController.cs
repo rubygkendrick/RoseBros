@@ -140,52 +140,31 @@ public class RoseController : ControllerBase
         return Ok(roseToAdd);
     }
 
-    //[HttpPost("add")]
-    //[Authorize(Roles = "Admin")]
-    //public IActionResult AddRose(Rose newRose)
-    //{
-    //
-    //    if (newRose == null)
-    //    {
-    //        return BadRequest("The rose you are trying to add is null or has incomplete information");
-    //    }
-    //
-    //    var existingRose = _dbContext.Roses.FirstOrDefault(r => r.Name == newRose.Name);
-    //
-    //
-    //    var color = _dbContext.Colors.Find(newRose.ColorId);
-    //    var habit = _dbContext.Habits.Find(newRose.HabitId);
-    //
-    //    if (color == null || habit == null)
-    //    {
-    //        return BadRequest("Invalid ColorId or HabitId");
-    //    }
-    //
-    //    if (existingRose == null)
-    //    {
-    //        var roseToAdd = new Rose
-    //        {
-    //            Name = newRose.Name,
-    //            ColorId = newRose.ColorId,
-    //            Color = color,
-    //            HabitId = newRose.HabitId,
-    //            Habit = habit,
-    //            Description = newRose.Description,
-    //            Image = newRose.Image,
-    //            PricePerUnit = newRose.PricePerUnit,
-    //        };
-    //
-    //        _dbContext.Roses.Add(roseToAdd);
-    //        _dbContext.SaveChanges();
-    //
-    //        return Ok(roseToAdd);
-    //    }
-    //    else
-    //    {
-    //        return BadRequest("A Rose with this name already exists in the database");
-    //    }
-    //
-    //}
-    //
-    //
+    [HttpPut("updateStockStatus/{roseId}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult UpdateStockStatus(int roseId)
+    {
+
+        Rose roseToUpdate = _dbContext.Roses
+         .SingleOrDefault(r => r.Id == roseId);
+
+        if (roseToUpdate == null)
+        {
+            return NotFound("This rose does not exist");
+        }
+
+
+        if (roseToUpdate.OutOfStock)
+        {
+            roseToUpdate.OutOfStock = false;
+        }
+        else
+        {
+            roseToUpdate.OutOfStock = true;
+        }
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
 }

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import "./InventoryView.css"
 import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from 'react-icons/fa';
-import { Button, Card, CardBody, CardImg, CardText, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
-import { getRoses } from "../../managers/roseManager";
+import { Button, Card, CardBody, CardImg, CardText, Col,  Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
+import { getRoses, updateStockStatus } from "../../managers/roseManager";
 
 
 
@@ -23,6 +23,11 @@ export default function InventoryView({ loggedInUser }) {
 
    const handleAddClick = () => {
     navigate("/add-inventory")
+   }
+
+   const handleUpdateStockConfirm = (event) => {
+    const roseId = parseInt(event.target.value)
+    updateStockStatus(roseId).then(() => setRefresh(!refresh))
    }
 
 
@@ -49,8 +54,9 @@ export default function InventoryView({ loggedInUser }) {
                                         </CardBody>
                                     </Col>
                                     <Col xs="4" sm="3" md="2">
-                                        {rose.outOfStock ? <Button className="in-stock-btn">Back In Stock</Button> : 
-                                        <Button>Out Of Stock</Button> }
+                                        {rose.outOfStock ? 
+                                        <Button value ={rose.id} onClick={handleUpdateStockConfirm} className="in-stock-btn">Back In Stock</Button> : 
+                                        <Button value ={rose.id} onClick={handleUpdateStockConfirm}>Out Of Stock</Button> }
                                        
                                     </Col>
                                     <Col xs="4" sm="3" md="2">
