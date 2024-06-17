@@ -21,4 +21,6 @@ public class RoseDTO
 
     public decimal PricePerUnit { get; set; }
 
+    public bool OutOfStock {get; set;}
+
 }

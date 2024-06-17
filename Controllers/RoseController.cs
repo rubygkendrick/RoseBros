@@ -42,7 +42,8 @@ public class RoseController : ControllerBase
                 },
                 Description = r.Description,
                 Image = r.Image,
-                PricePerUnit = r.PricePerUnit
+                PricePerUnit = r.PricePerUnit,
+                OutOfStock = r.OutOfStock
             }).ToList());
     }
 
@@ -78,7 +79,8 @@ public class RoseController : ControllerBase
             },
             Description = rose.Description,
             Image = rose.Image,
-            PricePerUnit = rose.PricePerUnit
+            PricePerUnit = rose.PricePerUnit,
+            OutOfStock = rose.OutOfStock
         });
     }
 
@@ -129,6 +131,7 @@ public class RoseController : ControllerBase
             Description = description,
             Image = $"/uploads/{image.FileName}", // Save the relative path
             PricePerUnit = pricePerUnit,
+            OutOfStock = false
         };
 
         _dbContext.Roses.Add(roseToAdd);

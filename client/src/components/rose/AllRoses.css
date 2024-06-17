@@ -1,5 +1,6 @@
 .card-padding-bottom {
     padding-bottom: 5px; 
+    
   }
 
   .rose-title {
@@ -8,3 +9,4 @@
   .rose-title:hover {
     background-color: #990303;
   }
+
