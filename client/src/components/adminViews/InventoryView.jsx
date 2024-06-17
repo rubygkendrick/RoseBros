@@ -21,19 +21,6 @@ export default function InventoryView({ loggedInUser }) {
            
     };
 
-   // const handleCancelClick = () => {
-   //     toggleModal();
-   // }
-//
-//
-//
-//
-   // const handleOrderRoseDelete = (roseId) => {
-//
-   //     deleteRose(roseId).then(() => {
-   //         setRefresh(!refresh);
-   //     });
-   // }
    const handleAddClick = () => {
     navigate("/add-inventory")
    }
@@ -62,15 +49,9 @@ export default function InventoryView({ loggedInUser }) {
                                         </CardBody>
                                     </Col>
                                     <Col xs="4" sm="3" md="2">
-                                        <Input
-                                            type="number"
-                                            min="1"
-                                            max="100"
-                                            defaultValue={rose.id}
-                                            id={rose.id}
-                                           
-                                            className="quantity-input"
-                                        />
+                                        {rose.outOfStock ? <Button>In Stock</Button> : 
+                                        <Button>Out Of Stock</Button> }
+                                       
                                     </Col>
                                     <Col xs="4" sm="3" md="2">
                                         <Button className="btn" >
