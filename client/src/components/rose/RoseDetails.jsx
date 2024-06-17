@@ -100,7 +100,7 @@ export default function RoseDetails({loggedInUser}) {
                 />
             </div>
             <div>
-                <Button className="custom-btn" onClick={handleAddToCart} style={{ marginTop: '40px' }}>
+                <Button className="custom-modal-button" onClick={handleAddToCart} style={{ marginTop: '40px' }}>
                     Add To Cart
                 </Button>
 
