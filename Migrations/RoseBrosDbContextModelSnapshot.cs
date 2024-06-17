@@ -149,13 +149,13 @@ namespace RoseBros.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2191597e-7770-4e43-9e3e-d0da05244922",
+                            ConcurrencyStamp = "21669446-f7b5-45ba-b074-ad801ee43b43",
                             Email = "admina@strator.comx",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAENuCCFDICPot7QimgSLTL8v5q66TpJM17tUarzLZ617Nt63rkP7Vb82q6KSd3dK/EQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHbTKP3wDoW5A1aOX4AxOUcfpRp6IjR75dZFzeP6TI+28QcyIZ6I1b+KBOe126P/Og==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b7aa2a34-9b9b-4b14-ba53-ed47b26b5003",
+                            SecurityStamp = "b6e8c9f2-df18-49f5-af6f-a3d5bc292547",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });
@@ -364,7 +364,7 @@ namespace RoseBros.Migrations
                             Id = 1,
                             IsActive = false,
                             IsFulfilled = false,
-                            PurchaseDate = new DateTime(2024, 6, 11, 11, 37, 48, 755, DateTimeKind.Local).AddTicks(8350),
+                            PurchaseDate = new DateTime(2024, 6, 17, 13, 42, 16, 831, DateTimeKind.Local).AddTicks(5280),
                             UserProfileId = 1
                         },
                         new
@@ -372,7 +372,7 @@ namespace RoseBros.Migrations
                             Id = 2,
                             IsActive = false,
                             IsFulfilled = true,
-                            PurchaseDate = new DateTime(2024, 6, 11, 11, 37, 48, 755, DateTimeKind.Local).AddTicks(8400),
+                            PurchaseDate = new DateTime(2024, 6, 17, 13, 42, 16, 831, DateTimeKind.Local).AddTicks(5320),
                             UserProfileId = 1
                         });
                 });
@@ -442,6 +442,9 @@ namespace RoseBros.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("character varying(150)");
 
+                    b.Property<bool>("OutOfStock")
+                        .HasColumnType("boolean");
+
                     b.Property<decimal>("PricePerUnit")
                         .HasColumnType("numeric");
 
@@ -462,6 +465,7 @@ namespace RoseBros.Migrations
                             HabitId = 4,
                             Image = "https://www.davidaustinroses.com/cdn/shop/products/358bc42b0d8f9ba59b76aad2d2ed90f2_795x.jpg?v=1595523644",
                             Name = "The Lady of The Lake",
+                            OutOfStock = false,
                             PricePerUnit = 35.00m
                         },
                         new
@@ -472,6 +476,7 @@ namespace RoseBros.Migrations
                             HabitId = 2,
                             Image = "https://www.davidaustinroses.com/cdn/shop/products/783d07a90fbff613fc0a0d0506858ccd_795x.jpg?v=1617282312",
                             Name = "Lady Of Shallot",
+                            OutOfStock = false,
                             PricePerUnit = 36.00m
                         },
                         new
@@ -482,6 +487,7 @@ namespace RoseBros.Migrations
                             HabitId = 1,
                             Image = "https://www.davidaustinroses.com/cdn/shop/products/09e82fb705e43e9f3c3d31b9495757ac_ac2531c1-c620-410b-9a07-4b4a6bd66fc7_795x.jpg?v=1595522786",
                             Name = "Graham Thomas",
+                            OutOfStock = false,
                             PricePerUnit = 55.00m
                         },
                         new
@@ -492,6 +498,7 @@ namespace RoseBros.Migrations
                             HabitId = 2,
                             Image = "https://www.davidaustinroses.com/cdn/shop/products/ffd44b06340221e58080644cd3ad5c87_795x.jpg?v=1616146482",
                             Name = "Desdemona",
+                            OutOfStock = false,
                             PricePerUnit = 35.00m
                         },
                         new
@@ -502,6 +509,7 @@ namespace RoseBros.Migrations
                             HabitId = 3,
                             Image = "https://www.davidaustinroses.com/cdn/shop/products/4f715479e7dbb2b800beda26869cbbb5_e15646fa-eda9-41ae-bec2-1d6dffcc10e3_795x.jpg?v=1595522050",
                             Name = "Darcy Bussel",
+                            OutOfStock = false,
                             PricePerUnit = 70.00m
                         },
                         new
@@ -512,6 +520,7 @@ namespace RoseBros.Migrations
                             HabitId = 2,
                             Image = "https://www.davidaustinroses.com/cdn/shop/products/4dff2acd3891f03d26c87e66efa32606_795x.jpg?v=1595521190",
                             Name = "Boscobel",
+                            OutOfStock = false,
                             PricePerUnit = 50.00m
                         },
                         new
@@ -522,6 +531,7 @@ namespace RoseBros.Migrations
                             HabitId = 3,
                             Image = "https://www.davidaustinroses.com/cdn/shop/products/ec42c2f8ba68d786f220a5fdd3738b89_795x.jpg?v=1595524724",
                             Name = "The Poet's Wife",
+                            OutOfStock = false,
                             PricePerUnit = 50.00m
                         },
                         new
@@ -532,6 +542,7 @@ namespace RoseBros.Migrations
                             HabitId = 2,
                             Image = "https://www.davidaustinroses.com/cdn/shop/products/e3ce5bfc923712cc3fa0f4c423e49f1f_9d85aab2-745d-4b96-9448-10ee85a83937_795x.jpg?v=1595521072",
                             Name = "Benjamin Britten",
+                            OutOfStock = false,
                             PricePerUnit = 50.00m
                         },
                         new
@@ -542,6 +553,7 @@ namespace RoseBros.Migrations
                             HabitId = 2,
                             Image = "https://www.davidaustinroses.com/cdn/shop/products/f05472b357e002125394e843afc1e5a5_795x.jpg?v=1616501617",
                             Name = "Benjamin Britten",
+                            OutOfStock = false,
                             PricePerUnit = 35.00m
                         });
                 });
