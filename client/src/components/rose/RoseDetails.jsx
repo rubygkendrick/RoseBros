@@ -6,7 +6,7 @@ import { Button, Card, CardBody, CardImg, Modal, ModalBody, ModalFooter, ModalHe
 import { newOrder } from "../../managers/orderManager";
 import { newOrderRose } from "../../managers/orderRoseManager";
 
-export default function RoseDetails({loggedInUser}) {
+export default function RoseDetails({ loggedInUser }) {
     const [rose, setRose] = useState([]);
     const [modal, setModal] = useState(false);
     const [quantity, setQuantity] = useState(0);
@@ -86,35 +86,38 @@ export default function RoseDetails({loggedInUser}) {
             <div>
                 <h5 className="price-tag">${rose.pricePerUnit} per bareroot</h5>
             </div>
+            {rose.outOfStock ? <h3 className="outOfStock">Out Of Stock</h3> :
+                <>
+                    <div className="qty-input">
+                        <label htmlFor="quantity">Quantity: </label>
+                        <input
+                            type="number"
+                            id="quantity"
+                            name="quantity"
+                            min="1"
+                            max="100"
+                            defaultValue=""
+                            onChange={handleQuantityChange}
+                        />
+                    </div>
+                    <div>
+                        <Button className="custom-modal-button" onClick={handleAddToCart} style={{ marginTop: '40px' }}>
+                            Add To Cart
+                        </Button>
 
-            <div className="qty-input">
-                <label htmlFor="quantity">Quantity: </label>
-                <input
-                    type="number"
-                    id="quantity"
-                    name="quantity"
-                    min="1"
-                    max="100"
-                    defaultValue=""
-                    onChange={handleQuantityChange}
-                />
-            </div>
-            <div>
-                <Button className="custom-modal-button" onClick={handleAddToCart} style={{ marginTop: '40px' }}>
-                    Add To Cart
-                </Button>
+                        <Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
+                            <ModalHeader toggle={toggleModal} className="custom-modal-header">Added to Cart</ModalHeader>
+                            <ModalBody className="custom-modal-body">
+                                Would you like to continue to the cart or keep shopping?
+                            </ModalBody>
+                            <ModalFooter className="custom-modal-footer">
+                                <Button className="custom-modal-button" onClick={handleContinueToCart}>Go to Cart</Button>{' '}
+                                <Button className="custom-modal-button-secondary" onClick={handleKeepShopping}>Keep Shopping</Button>
+                            </ModalFooter>
+                        </Modal>
+                    </div> </>
+            }
 
-                <Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
-                    <ModalHeader toggle={toggleModal} className="custom-modal-header">Added to Cart</ModalHeader>
-                    <ModalBody className="custom-modal-body">
-                        Would you like to continue to the cart or keep shopping?
-                    </ModalBody>
-                    <ModalFooter className="custom-modal-footer">
-                        <Button className="custom-modal-button" onClick={handleContinueToCart}>Go to Cart</Button>{' '}
-                        <Button className="custom-modal-button-secondary" onClick={handleKeepShopping}>Keep Shopping</Button>
-                    </ModalFooter>
-                </Modal>
-            </div>
         </>
     );
 

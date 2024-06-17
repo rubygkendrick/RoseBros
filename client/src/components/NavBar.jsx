@@ -35,8 +35,8 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                         </Collapse>
                         {loggedInUser.roles.includes("Admin") && (
                           
-                                <NavLink className="nav-item" tag={RRNavLink} to="/add-inventory">
-                                    Add Inventory
+                                <NavLink className="nav-item" tag={RRNavLink} to="/inventory">
+                                    Inventory
                                 </NavLink>
                           
                         )}

@@ -26,6 +26,8 @@ public class Rose
     [Required]
     public decimal PricePerUnit { get; set; }
 
+    public bool OutOfStock {get; set;}
+
     public List<OrderRose>? OrderRoses { get; set; }
 
 
