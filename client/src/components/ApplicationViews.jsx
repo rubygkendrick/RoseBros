@@ -11,6 +11,7 @@ import OrderConfirmation from "./OrderConfirmation";
 import ProfileView from "./ProfileView";
 import Whoops from "./Whoops";
 import AddInventory from "./adminViews/AddInventory";
+import InventoryView from "./adminViews/InventoryView";
 
 
 
@@ -56,6 +57,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           element={
             <AuthorizedRoute loggedInUser={loggedInUser}>
               <OrderConfirmation loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
+          }
+        />
+         <Route
+          path="inventory"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
+              <InventoryView />
             </AuthorizedRoute>
           }
         />

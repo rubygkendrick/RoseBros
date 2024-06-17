@@ -1,0 +1,97 @@
+
+
+.order-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.order-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-width: 600px; /* Set a max-width to control the width of the card */
+    width: 100%; /* Ensure the card takes up the full width up to the max-width */
+}
+
+.order-card-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.card-padding-bottom {
+    padding-bottom: 0.5rem;
+}
+
+.quantity-input {
+    width: 60px; /* Adjust the width as needed */
+    margin-right: 10px;
+}
+
+.quantity-text {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.trash-icon {
+    color: black;
+    background: transparent; /* Ensure the background is transparent */
+    border: none; /* Remove any default border */
+    cursor: pointer; /* Change cursor to pointer for better UX */
+}
+.btn {
+    background-color: #bfbcbc6d;
+    border-color: #817f7f6d;
+    margin-right: 1rem;
+  }
+
+  .btn:hover {
+    background-color: #990303;
+  
+  }
+
+  .total {
+    margin-top: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 20px; 
+  }
+
+  .purchase-btn {
+    background-color: #bfbcbc6d;
+    border-color: #817f7f6d;
+    margin-top: 1rem;
+  }
+
+  .purchase-btn:hover {
+    background-color: #990303;
+  
+  }
+
+
+.rose-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 18px; 
+}
+
+
+.price {
+    font-weight: bold;
+    color: #555;
+    font-size: 14px; 
+}
+
+.empty-cart{
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.add-btn {
+    margin-top: 4rem;
+}
