@@ -62,7 +62,7 @@ export default function OrdersView() {
                                     </Row>
                                 ))}
                             </Col>
-                            <Col xs="8">
+                            <Col xs="6">
                                 <CardBody className="text-center">
                                     <CardText className="mb-2">
                                         Order placed: <strong>{moment(order.purchaseDate).format('DD MMM YYYY')}</strong>
