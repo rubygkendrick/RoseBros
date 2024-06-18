@@ -35,7 +35,7 @@ export default function AllRoses({ loggedInUser, setLoggedInUser, roles }) {
                                     src={`${rose.image}?${new Date().getTime()}`} alt={rose.name} />
                                 <CardBody className="card-padding-bottom">
                                     <Link to={`/rose/${rose.id}`} className="rose-title">
-                                        <CardTitle tag="h2">{rose.name}</CardTitle>
+                                        <CardText tag="h3">{rose.name}</CardText>
                                     </Link>
                                     <CardText>{rose.habit?.name} Rose</CardText>
                                     {rose.outOfStock ? 
