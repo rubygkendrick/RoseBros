@@ -1,0 +1,37 @@
+.header-tag {
+    margin-top: 7rem;
+}
+
+.message {
+    margin-top: 3rem;
+}
+
+
+
+
+#rose-name {
+    margin-left: 0;
+}
+
+
+.rose-name, .rose-quantity {
+    display: flex;
+    align-items: center;
+  
+   
+}
+
+#qty {
+   text-align: center;
+   margin-left: 2.65rem;
+}
+
+#fulfill-btn{
+    margin-top: 1rem;
+    background-color: green;
+}
+
+#fulfill-btn:hover{
+  
+    background-color: #333;
+}

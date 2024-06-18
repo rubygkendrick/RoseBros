@@ -34,11 +34,14 @@ export default function NavBar({ loggedInUser, setLoggedInUser }) {
                             <Nav navbar></Nav>
                         </Collapse>
                         {loggedInUser.roles.includes("Admin") && (
-                          
+                                <>
                                 <NavLink className="nav-item" tag={RRNavLink} to="/inventory">
                                     Inventory
                                 </NavLink>
-                          
+                                <NavLink className="nav-item" tag={RRNavLink} to="/orders">
+                                    Orders
+                                </NavLink>
+                                </>                         
                         )}
                         <NavLink className="nav-item" tag={RRNavLink} to="/cart">
                             Cart

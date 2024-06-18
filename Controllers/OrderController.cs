@@ -101,5 +101,50 @@ public class OrderController : ControllerBase
         return NoContent();
     }
 
+    [HttpGet]
+    [Authorize(Roles = "Admin")]
+    public IActionResult Get()
+    {
+        var orders = _dbContext.Orders
+            .Include(o => o.OrderRoses)
+            .ThenInclude(or => or.Rose)
+            .Where(o => !o.IsActive)
+            .OrderBy(o => o.IsFulfilled)
+            .Select(o => new OrderDTO
+            {
+                Id = o.Id,
+                UserProfileId = o.UserProfileId,
+                UserProfile = o.UserProfile,
+                IsActive = o.IsActive,
+                IsFulfilled = o.IsFulfilled,
+                PurchaseDate = o.PurchaseDate,
+                OrderRoses = o.OrderRoses,
+            })
+            .ToList();
+
+        return Ok(orders);
+    }
+
+    [HttpPut("fulfill/{orderId}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult FulfillOrder(int orderId)
+    {
+
+        Order orderToFulfill = _dbContext.Orders
+         .SingleOrDefault(o => o.Id == orderId);
+
+        if (orderToFulfill == null)
+        {
+            return NotFound("This order does not exist");
+        }
+
+        orderToFulfill.IsFulfilled = true;
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
+
+
 
 }

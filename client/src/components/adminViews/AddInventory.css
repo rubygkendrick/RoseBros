@@ -1,10 +1,6 @@
 .form-body {
    
     margin-top: 7rem;
-
-
-
-
 }
 
 .input-field {
@@ -14,4 +10,12 @@
 
 .submit {
     margin-top: 2rem;
+}
+
+#submit-btn {
+    background-color: #bfbcbc6d;
+}
+
+#submit-btn:hover {
+    background-color: green;
 }

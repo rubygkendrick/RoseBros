@@ -32,19 +32,22 @@ public class UserProfileController : ControllerBase
             return NotFound("This user does not exist in the system");
         }
 
-        List<Order> orders = _dbContext.Orders.Where(o => o.UserProfileId == id).ToList();
+        List<Order> orders = _dbContext.Orders
+       .Where(o => o.UserProfileId == id)
+       .OrderBy(o => o.IsFulfilled) 
+       .ToList();
 
         return Ok(new UserProfileWithOrdersDTO
-       {
-                Id = user.Id,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Address = user.Address,
-                Orders = orders
-            });
+        {
+            Id = user.Id,
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            Address = user.Address,
+            Orders = orders
+        });
     }
 
-    
+
 
 }

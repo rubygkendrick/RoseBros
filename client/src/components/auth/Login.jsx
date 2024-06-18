@@ -23,7 +23,7 @@ export default function Login({ setLoggedInUser }) {
 
   return (
     <div className="container" style={{ maxWidth: "500px" , marginTop: '40px' }}>
-      <h3>Login</h3>
+      <h3 id="login">Login</h3>
       <FormGroup>
         <Label>Email</Label>
         <Input
@@ -50,7 +50,7 @@ export default function Login({ setLoggedInUser }) {
         <FormFeedback>Login failed.</FormFeedback>
       </FormGroup>
 
-      <Button className="custom-btn" onClick={handleSubmit}>
+      <Button className="custom-btn" id = "login" onClick={handleSubmit}>
         Login
       </Button>
       <p>

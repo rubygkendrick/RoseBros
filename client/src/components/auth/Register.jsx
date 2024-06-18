@@ -44,7 +44,7 @@ export default function Register({ setLoggedInUser }) {
 
   return (
     <div className="container" style={{ maxWidth: "500px", marginTop: '40px' }}>
-      <h3>Sign Up</h3>
+      <h3 id="login">Sign Up</h3>
       <FormGroup>
         <Label>First Name</Label>
         <Input
@@ -125,6 +125,7 @@ export default function Register({ setLoggedInUser }) {
       </p>
       <Button
         className="custom-btn"
+        id = "login"
         onClick={handleSubmit}
         disabled={passwordMismatch}
       >

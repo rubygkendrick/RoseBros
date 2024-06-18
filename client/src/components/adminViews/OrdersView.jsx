@@ -1,40 +1,38 @@
-
 import { useEffect, useState } from "react";
-import "./OrderConfirmation.css"
-import { getUserById } from "../managers/userManager";
-import { Card, CardBody, CardImg, CardText, Col, Row } from "reactstrap";
+import "./OrdersView.css"
+
+import { Button, Card, CardBody, CardImg, CardText, Col, Row } from "reactstrap";
 import moment from 'moment';
+import { fulfillOrder, getOrdersForAdmins } from "../../managers/orderManager";
 
 
-export default function ProfileView({ loggedInUser }) {
+export default function OrdersView() {
 
-    const [user, setUser] = useState({})
+    const [orders, setOrders] = useState([])
+    const [refresh, setRefresh] = useState(false);
 
-    const getAndSetUser = () => {
-        // eslint-disable-next-line react/prop-types
-        getUserById(loggedInUser.id).then(setUser);
+    const getAndSetOrders = () => {
+        getOrdersForAdmins().then(setOrders);
+
     }
 
-
     useEffect(() => {
-        getAndSetUser();
-    }, []);
+        getAndSetOrders();
+    }, [refresh]);
 
-
-
+    const handleFulFillClick = (event) => {
+        const orderId = parseInt(event.target.value)
+        fulfillOrder(orderId).then(() => setRefresh(!refresh))
+    }
 
 
     return (
         <>
             <div className="header-tag">
-                <h2>{user.firstName} {user.lastName}</h2>
-            </div>
-            <div className="message">
-                <h4>{user.email}</h4>
-                <h4>{user.address}</h4>
+                <h2>Orders</h2>
             </div>
             <div className="order-card-container">
-                {user.orders?.filter(order => !order.isActive).map((order) => (
+                {orders.map((order) => (
                     <Card key={order.id} className="order-card my-3">
                         <Row className="g-0 align-items-center"  >
                             <Col xs="4">
@@ -75,13 +73,23 @@ export default function ProfileView({ loggedInUser }) {
                                     <CardText className={`mb-2 ${!order.isFulfilled ? 'text-danger' : ''}`}>
                                         Order Delivered: <strong>{order.isFulfilled ? 'true' : 'false'}</strong>
                                     </CardText>
+                                    <Col className="mt-3">
+                                        {!order.isFulfilled && (
+                                            <Button
+                                                id="fulfill-btn"
+                                                value={order.id}
+                                                onClick={handleFulFillClick}
+                                            >
+                                                Fulfill
+                                            </Button>
+                                        )}
+                                    </Col>
                                 </CardBody>
                             </Col>
                         </Row>
                     </Card>
                 ))}
             </div>
-
         </>
     );
 

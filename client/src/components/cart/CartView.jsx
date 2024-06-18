@@ -36,7 +36,7 @@ export default function CartView({ loggedInUser }) {
 
     const handleQuantityChange = (event) => {
         const newQty = parseInt(event.target.value)
-        if ( newQty <= 0 || isNaN(newQty)) {
+        if (newQty <= 0 || isNaN(newQty)) {
             window.alert("You must enter a valid quantity (a non-negative number).");
             return;
         }
@@ -75,7 +75,8 @@ export default function CartView({ loggedInUser }) {
             {orderEmpty === true ? (
                 <>
                     <p className="empty-cart">Uh oh! Your cart is empty</p>
-                    <Button className="purchase-btn" onClick={handleKeepShoppingClick}>Start Shopping</Button>
+                    <Button className="purchase-btn"
+                        onClick={handleKeepShoppingClick}>Start Shopping</Button>
                 </>
             ) : (
                 <>
@@ -84,12 +85,19 @@ export default function CartView({ loggedInUser }) {
                             <Card key={orderRose.roseId} className="order-card my-3">
                                 <Row className="g-0 align-items-center">
                                     <Col xs="4" sm="3" md="2">
-                                        <CardImg className="order-card-img" src={orderRose.rose?.image} alt={orderRose.rose?.name} />
+                                        <CardImg className="order-card-img"
+                                            src={orderRose.rose?.image} alt={orderRose.rose?.name} />
                                     </Col>
-                                    <Col xs="8" sm="9" md="6">
-                                        <CardBody>
-                                            <CardText className="mb-0 rose-name"><strong>{orderRose.rose?.name} Rose</strong></CardText>
-                                            <CardText className="mb-0 price"><strong>${orderRose.rose?.pricePerUnit} per bareroot</strong></CardText>
+                                    <Col xs="12" sm="9" md="6">
+                                        <CardBody className="text-center">
+                                            <div className="card-text-container">
+                                                <CardText className="mb-0 rose-name">
+                                                    <strong>{orderRose.rose?.name}</strong>
+                                                </CardText>
+                                                <CardText className="mb-0" id="price">
+                                                    <strong>${orderRose.rose?.pricePerUnit} per bareroot</strong>
+                                                </CardText>
+                                            </div>
                                         </CardBody>
                                     </Col>
                                     <Col xs="4" sm="3" md="2">
@@ -104,7 +112,8 @@ export default function CartView({ loggedInUser }) {
                                         />
                                     </Col>
                                     <Col xs="4" sm="3" md="2">
-                                        <Button className="btn" onClick={() => handleOrderRoseDelete(orderRose.roseId)}>
+                                        <Button className="btn"
+                                            onClick={() => handleOrderRoseDelete(orderRose.roseId)}>
                                             <FaTrashAlt className="trash-icon" />
                                         </Button>
                                     </Col>
@@ -119,14 +128,18 @@ export default function CartView({ loggedInUser }) {
                         <Button className="purchase-btn" onClick={handlePurchaseClick}>Purchase</Button>
                     </div>
 
-                    <Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
-                        <ModalHeader toggle={toggleModal} className="custom-modal-header">Confirmation:</ModalHeader>
+                    <Modal isOpen={modal} toggle={toggleModal}
+                        className="custom-modal">
+                        <ModalHeader toggle={toggleModal}
+                            className="custom-modal-header">Confirmation:</ModalHeader>
                         <ModalBody className="custom-modal-body">
                             Would you like to continue with this purchase?
                         </ModalBody>
                         <ModalFooter className="custom-modal-footer">
-                            <Button className="custom-modal-button" onClick={() => handlePurchaseConfirm(order.id)}>Complete Purchase</Button>{' '}
-                            <Button className="custom-modal-button-secondary" onClick={handleCancelClick}>Cancel</Button>
+                            <Button className="custom-modal-button"
+                                onClick={() => handlePurchaseConfirm(order.id)}>Complete Purchase</Button>{' '}
+                            <Button className="custom-modal-button-secondary"
+                                onClick={handleCancelClick}>Cancel</Button>
                         </ModalFooter>
                     </Modal>
                 </>

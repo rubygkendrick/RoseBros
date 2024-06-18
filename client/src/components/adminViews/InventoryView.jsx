@@ -39,9 +39,9 @@ export default function InventoryView({ loggedInUser }) {
     const handleDeleteConfirm = () => {
         deleteRose(roseIdToDelete).then(() => {
             setRefresh(!refresh);
-            toggleModal(); 
+            toggleModal();
         });
-      
+
     };
     const handleCancelClick = () => {
         toggleModal();
@@ -63,14 +63,16 @@ export default function InventoryView({ loggedInUser }) {
                             <Col xs="4" sm="3" md="2">
                                 <CardImg className="order-card-img" src={rose.image} alt={rose.name} />
                             </Col>
-                            <Col xs="8" sm="9" md="6">
-                                <CardBody>
-                                    <CardText className="mb-0 rose-name">
-                                        <strong>{rose.name} Rose</strong>
-                                    </CardText>
-                                    <CardText className="mb-0 price">
-                                        <strong>${rose.pricePerUnit} per bareroot</strong>
-                                    </CardText>
+                            <Col xs="12" sm="9" md="6">
+                                <CardBody className="text-center">
+                                    <div className="card-text-container">
+                                        <CardText className="mb-0 rose-name">
+                                            <strong>{rose.name}</strong>
+                                        </CardText>
+                                        <CardText className="mb-0" id="price">
+                                            <strong>${rose.pricePerUnit} per bareroot</strong>
+                                        </CardText>
+                                    </div>
                                 </CardBody>
                             </Col>
                             <Col xs="4" sm="3" md="2">
@@ -87,7 +89,8 @@ export default function InventoryView({ loggedInUser }) {
                                 </Button>
                             </Col>
                         </Row>
-                    </Card><Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
+                    </Card>
+                        <Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
                             <ModalHeader toggle={toggleModal} className="custom-modal-header">Confirmation:</ModalHeader>
                             <ModalBody className="custom-modal-body">
                                 Are you sure you want to delete this rose?

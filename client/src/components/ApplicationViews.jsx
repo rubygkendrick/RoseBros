@@ -12,6 +12,7 @@ import ProfileView from "./ProfileView";
 import Whoops from "./Whoops";
 import AddInventory from "./adminViews/AddInventory";
 import InventoryView from "./adminViews/InventoryView";
+import OrdersView from "./adminViews/OrdersView";
 
 
 
@@ -73,6 +74,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           element={
             <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
               <AddInventory loggedInUser={loggedInUser} roles={["Admin"]}/>
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="orders"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
+              <OrdersView loggedInUser={loggedInUser} roles={["Admin"]}/>
             </AuthorizedRoute>
           }
         />

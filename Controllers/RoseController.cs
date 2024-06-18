@@ -44,7 +44,7 @@ public class RoseController : ControllerBase
                 Image = r.Image,
                 PricePerUnit = r.PricePerUnit,
                 OutOfStock = r.OutOfStock
-            }).ToList());
+            }).OrderBy(r => r.OutOfStock).ToList());
     }
 
     [HttpGet("{id}")]
