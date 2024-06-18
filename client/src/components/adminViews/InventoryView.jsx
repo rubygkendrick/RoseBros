@@ -12,6 +12,7 @@ export default function InventoryView({ loggedInUser }) {
     const [inventory, setInventory] = useState([]);
     const [refresh, setRefresh] = useState(false);
     const [modal, setModal] = useState(false);
+    const [roseIdToDelete, setRoseIdToDelete] = useState(null);
 
     const navigate = useNavigate();
     const toggleModal = () => setModal(!modal);
@@ -30,16 +31,18 @@ export default function InventoryView({ loggedInUser }) {
         updateStockStatus(roseId).then(() => setRefresh(!refresh))
     }
 
-    const handleDeleteClick = () => {
+    const handleDeleteClick = (roseId) => {
+        setRoseIdToDelete(roseId);
         toggleModal();
-    }
+    };
 
-    const handleDeleteConfirm = (event) => {
-        const roseId = parseInt(event.target.value)
-        deleteRose(roseId).then(() => { setRefresh(!refresh) })
-        toggleModal();
-    }
-
+    const handleDeleteConfirm = () => {
+        deleteRose(roseIdToDelete).then(() => {
+            setRefresh(!refresh);
+            toggleModal(); 
+        });
+      
+    };
     const handleCancelClick = () => {
         toggleModal();
     }
@@ -55,7 +58,7 @@ export default function InventoryView({ loggedInUser }) {
             >Add Inventory</Button>
             <div className="order-card-container" >
                 {inventory.map((rose) => (
-                    <><Card key={rose.id} className="order-card my-3">
+                    <div key={rose.id}><Card key={rose.id} className="order-card my-3">
                         <Row className="g-0 align-items-center">
                             <Col xs="4" sm="3" md="2">
                                 <CardImg className="order-card-img" src={rose.image} alt={rose.name} />
@@ -80,7 +83,7 @@ export default function InventoryView({ loggedInUser }) {
 
                             </Col>
                             <Col xs="4" sm="3" md="2">
-                                <Button className="btn" onClick={handleDeleteClick}>
+                                <Button className="btn" onClick={() => handleDeleteClick(rose.id)}>
                                     <FaTrashAlt className="trash-icon" />
                                 </Button>
                             </Col>
@@ -92,11 +95,11 @@ export default function InventoryView({ loggedInUser }) {
                             </ModalBody>
                             <ModalFooter className="custom-modal-footer">
                                 <Button className="custom-modal-button"
-                                onClick={handleCancelClick}>Cancel</Button>{' '}
-                                <Button className="custom-modal-button-secondary" 
-                                value={rose.id} onClick={handleDeleteConfirm}>Delete</Button>
+                                    onClick={handleCancelClick}>Cancel</Button>{' '}
+                                <Button className="custom-modal-button-secondary"
+                                    value={rose.id} onClick={handleDeleteConfirm}>Delete</Button>
                             </ModalFooter>
-                        </Modal></>
+                        </Modal></div>
 
                 ))}
 
