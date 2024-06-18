@@ -3,12 +3,13 @@ import "./OrdersView.css"
 
 import { Button, Card, CardBody, CardImg, CardText, Col, Row } from "reactstrap";
 import moment from 'moment';
-import { getOrdersForAdmins } from "../../managers/orderManager";
+import { fulfillOrder, getOrdersForAdmins } from "../../managers/orderManager";
 
 
 export default function OrdersView() {
 
     const [orders, setOrders] = useState([])
+    const [refresh, setRefresh] = useState(false);
 
     const getAndSetOrders = () => {
         getOrdersForAdmins().then(setOrders);
@@ -17,8 +18,12 @@ export default function OrdersView() {
 
     useEffect(() => {
         getAndSetOrders();
-    }, []);
+    }, [refresh]);
 
+    const handleFulFillClick = (event) => {
+        const orderId = parseInt(event.target.value)
+        fulfillOrder(orderId).then(() => setRefresh(!refresh))
+    }
 
 
     return (
@@ -38,7 +43,7 @@ export default function OrdersView() {
                                         </Col>
                                         <Col xs="6">
                                             <Row>
-                                                <Col xs="12" className="rose-name" >
+                                                <Col xs="12" >
                                                     <CardText id="rose-name">
                                                         <strong>{or.rose.name}</strong>
                                                     </CardText>
@@ -68,7 +73,8 @@ export default function OrdersView() {
                                         {!order.isFulfilled && (
                                             <Button
                                                 id ="fulfill-btn"
-                                               
+                                                value = {order.id}
+                                                onClick={handleFulFillClick}                                              
                                             >
                                                 Fulfill
                                             </Button>

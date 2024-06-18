@@ -39,9 +39,9 @@ export default function InventoryView({ loggedInUser }) {
     const handleDeleteConfirm = () => {
         deleteRose(roseIdToDelete).then(() => {
             setRefresh(!refresh);
-            toggleModal(); 
+            toggleModal();
         });
-      
+
     };
     const handleCancelClick = () => {
         toggleModal();
@@ -87,7 +87,8 @@ export default function InventoryView({ loggedInUser }) {
                                 </Button>
                             </Col>
                         </Row>
-                    </Card><Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
+                    </Card>
+                        <Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
                             <ModalHeader toggle={toggleModal} className="custom-modal-header">Confirmation:</ModalHeader>
                             <ModalBody className="custom-modal-body">
                                 Are you sure you want to delete this rose?

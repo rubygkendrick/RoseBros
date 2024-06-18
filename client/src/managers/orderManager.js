@@ -18,7 +18,6 @@ export const getActiveOrderByUserId = (userId) => {
           return Promise.reject(text);
         });
       }
-      // Return JSON data when response is okay
       return response.json();
     });
 };
@@ -32,8 +31,16 @@ export const completeOrder = (orderId) => {
   })
 };
 
-
-
 export const getOrdersForAdmins = () => {
   return fetch(`${_apiUrl}`).then((res) => res.json());
 };
+
+export const fulfillOrder = (orderId) => {
+  return fetch(`${_apiUrl}/fulfill/${orderId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+};
+

@@ -134,7 +134,7 @@ export default function AddInventory() {
                     />
                 </FormGroup>
 
-                <Button type="submit" className="custom-btn submit">
+                <Button type="submit" id = "submit-btn" className= "submit">
                     Submit
                 </Button>
             </Form>

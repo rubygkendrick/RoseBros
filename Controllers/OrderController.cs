@@ -125,6 +125,26 @@ public class OrderController : ControllerBase
         return Ok(orders);
     }
 
+    [HttpPut("fulfill/{orderId}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult FulfillOrder(int orderId)
+    {
+
+        Order orderToFulfill = _dbContext.Orders
+         .SingleOrDefault(o => o.Id == orderId);
+
+        if (orderToFulfill == null)
+        {
+            return NotFound("This order does not exist");
+        }
+
+        orderToFulfill.IsFulfilled = true;
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
+
 
 
 }
