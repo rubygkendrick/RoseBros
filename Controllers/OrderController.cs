@@ -117,6 +117,7 @@ public class OrderController : ControllerBase
                 UserProfile = o.UserProfile,
                 IsActive = o.IsActive,
                 IsFulfilled = o.IsFulfilled,
+                PurchaseDate = o.PurchaseDate,
                 OrderRoses = o.OrderRoses,
             })
             .ToList();

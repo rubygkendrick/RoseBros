@@ -31,3 +31,9 @@ export const completeOrder = (orderId) => {
     },
   })
 };
+
+
+
+export const getOrdersForAdmins = () => {
+  return fetch(`${_apiUrl}`).then((res) => res.json());
+};
