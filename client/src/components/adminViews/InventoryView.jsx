@@ -80,7 +80,6 @@ export default function InventoryView({ loggedInUser }) {
                                         className="in-stock-btn">Back In Stock</Button> :
                                     <Button value={rose.id}
                                         onClick={handleUpdateStockConfirm}>Out Of Stock</Button>}
-
                             </Col>
                             <Col xs="4" sm="3" md="2">
                                 <Button className="btn" onClick={() => handleDeleteClick(rose.id)}>
