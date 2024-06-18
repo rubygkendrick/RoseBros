@@ -101,5 +101,29 @@ public class OrderController : ControllerBase
         return NoContent();
     }
 
+    [HttpGet]
+    [Authorize(Roles = "Admin")]
+    public IActionResult Get()
+    {
+        var orders = _dbContext.Orders
+            .Include(o => o.OrderRoses)
+            .ThenInclude(or => or.Rose)
+            .Where(o => !o.IsActive)
+            .OrderBy(o => o.IsFulfilled)
+            .Select(o => new OrderDTO
+            {
+                Id = o.Id,
+                UserProfileId = o.UserProfileId,
+                UserProfile = o.UserProfile,
+                IsActive = o.IsActive,
+                IsFulfilled = o.IsFulfilled,
+                OrderRoses = o.OrderRoses,
+            })
+            .ToList();
+
+        return Ok(orders);
+    }
+
+
 
 }
