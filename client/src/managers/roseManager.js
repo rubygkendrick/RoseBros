@@ -14,3 +14,22 @@ export const addRose = (formData) => {
     body: formData,
   }).then((res) => res.json());
 };
+
+export const updateStockStatus = (roseId) => {
+  return fetch(`${_apiUrl}/updateStockStatus/${roseId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+};
+
+
+export const deleteRose = (roseId) => {
+  return fetch(`${_apiUrl}/delete/${roseId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};

@@ -294,7 +294,7 @@ namespace RoseBros.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "21669446-f7b5-45ba-b074-ad801ee43b43", "admina@strator.comx", false, false, null, null, null, "AQAAAAIAAYagAAAAEHbTKP3wDoW5A1aOX4AxOUcfpRp6IjR75dZFzeP6TI+28QcyIZ6I1b+KBOe126P/Og==", null, false, "b6e8c9f2-df18-49f5-af6f-a3d5bc292547", false, "Administrator" });
+                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "5e3cbfd8-8e6f-4365-8f15-7e4c6f7d87a1", "admina@strator.comx", false, false, null, null, null, "AQAAAAIAAYagAAAAEIifYVsdyIexgoUIAz5iAIIlWoEIBXeEVQX6dIFnwEyQxWkFHxdatEKeMMB9uWb76A==", null, false, "51ff1192-d121-421e-91dc-1e78e4ef1b96", false, "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "Colors",
@@ -350,8 +350,8 @@ namespace RoseBros.Migrations
                 columns: new[] { "Id", "IsActive", "IsFulfilled", "PurchaseDate", "UserProfileId" },
                 values: new object[,]
                 {
-                    { 1, false, false, new DateTime(2024, 6, 17, 13, 42, 16, 831, DateTimeKind.Local).AddTicks(5280), 1 },
-                    { 2, false, true, new DateTime(2024, 6, 17, 13, 42, 16, 831, DateTimeKind.Local).AddTicks(5320), 1 }
+                    { 1, false, false, new DateTime(2024, 6, 18, 9, 25, 45, 70, DateTimeKind.Local).AddTicks(5850), 1 },
+                    { 2, false, true, new DateTime(2024, 6, 18, 9, 25, 45, 70, DateTimeKind.Local).AddTicks(5930), 1 }
                 });
 
             migrationBuilder.InsertData(
