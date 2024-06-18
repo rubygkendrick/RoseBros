@@ -6,30 +6,8 @@
     margin-top: 3rem;
 }
 
-.fulfill-btn {
-    background-color: green;
-}
-.fulfill-btn:hover {
-    background-color: #333;
-}
 
 
-.order-card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    
-}
-
-.order-card {
-    width: 100%; /* You can adjust this to fit your layout */
-    max-width: 1000px;/* Adjust the maximum width as needed */
-    margin: 0 auto 20px;
-}
-
-.fulfill-btn {
-    margin-top: 10px;
-}
 
 #rose-name {
     margin-left: 0;
@@ -39,6 +17,19 @@
 .rose-name, .rose-quantity {
     display: flex;
     align-items: center;
-    margin-top: 1rem;
+   
 }
 
+#qty {
+    margin-left: 1.75rem;
+}
+
+#fulfill-btn{
+    margin-top: 1rem;
+    background-color: green;
+}
+
+#fulfill-btn:hover{
+  
+    background-color: #333;
+}

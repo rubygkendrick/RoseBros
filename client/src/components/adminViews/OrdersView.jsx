@@ -44,8 +44,8 @@ export default function OrdersView() {
                                                     </CardText>
                                                 </Col>
                                                 <Col xs="12" className="rose-quantity">
-                                                    <CardText>
-                                                        <strong>Quantity: {or.quantity}</strong>
+                                                    <CardText className="small mb-1" id = "qty">
+                                                        qty: {or.quantity}
                                                     </CardText>
                                                 </Col>
                                             </Row>
@@ -55,20 +55,20 @@ export default function OrdersView() {
                             </Col>
                             <Col xs="8">
                                 <CardBody className="text-center">
-                                    <CardText className="mb-0">
-                                        <strong>Order placed: {moment(order.purchaseDate).format('DD MMM YYYY')}</strong>
+                                    <CardText className="mb-2">
+                                        Order placed: <strong>{moment(order.purchaseDate).format('DD MMM YYYY')}</strong>
                                     </CardText>
-                                    <CardText className="mb-0">
-                                        <strong>Order total: ${order.total}</strong>
+                                    <CardText className="mb-2">
+                                       Order total: <strong>${order.total}</strong>
                                     </CardText>
-                                    <CardText className={`mb-0 ${!order.isFulfilled ? 'text-danger' : ''}`}>
-                                        <strong>Order Delivered: {order.isFulfilled ? 'true' : 'false'}</strong>
+                                    <CardText className={`mb-2 ${!order.isFulfilled ? 'text-danger' : ''}`}>
+                                        Order Delivered: <strong>{order.isFulfilled ? 'true' : 'false'}</strong>
                                     </CardText>
-                                    <Col>
+                                    <Col className="mt-3">
                                         {!order.isFulfilled && (
                                             <Button
-                                                className="fulfill-btn"
-
+                                                id ="fulfill-btn"
+                                               
                                             >
                                                 Fulfill
                                             </Button>
