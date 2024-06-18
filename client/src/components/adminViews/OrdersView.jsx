@@ -34,24 +34,28 @@ export default function OrdersView() {
             <div className="order-card-container">
                 {orders.map((order) => (
                     <Card key={order.id} className="order-card my-3">
-                        <Row className="g-0 align-items-center">
+                        <Row className="g-0 align-items-center"  >
                             <Col xs="4">
                                 {order.orderRoses.map((or, index) => (
-                                    <Row key={index} className="mb-2">
-                                        <Col xs="6">
+                                    <Row key={index} className="mb-2" >
+                                        <Col xs="8">
                                             <CardImg src={or.rose.image} alt="Order Rose Image" />
                                         </Col>
-                                        <Col xs="6">
+                                        <Col xs="12">
                                             <Row>
-                                                <Col xs="12" >
-                                                    <CardText id="rose-name">
-                                                        <strong>{or.rose.name}</strong>
-                                                    </CardText>
-                                                </Col>
-                                                <Col xs="12" className="rose-quantity">
-                                                    <CardText className="small mb-1" id = "qty">
-                                                        qty: {or.quantity}
-                                                    </CardText>
+                                                <Col xs="8">
+                                                    <Row>
+                                                        <Col xs="12">
+                                                            <CardText id="rose-name">
+                                                                <strong>{or.rose.name}</strong>
+                                                            </CardText>
+                                                        </Col>
+                                                        <Col xs="12" className="rose-quantity">
+                                                            <CardText className="small mb-1" id="qty">
+                                                                qty: {or.quantity}
+                                                            </CardText>
+                                                        </Col>
+                                                    </Row>
                                                 </Col>
                                             </Row>
                                         </Col>
@@ -64,7 +68,7 @@ export default function OrdersView() {
                                         Order placed: <strong>{moment(order.purchaseDate).format('DD MMM YYYY')}</strong>
                                     </CardText>
                                     <CardText className="mb-2">
-                                       Order total: <strong>${order.total}</strong>
+                                        Order total: <strong>${order.total}</strong>
                                     </CardText>
                                     <CardText className={`mb-2 ${!order.isFulfilled ? 'text-danger' : ''}`}>
                                         Order Delivered: <strong>{order.isFulfilled ? 'true' : 'false'}</strong>
@@ -72,9 +76,9 @@ export default function OrdersView() {
                                     <Col className="mt-3">
                                         {!order.isFulfilled && (
                                             <Button
-                                                id ="fulfill-btn"
-                                                value = {order.id}
-                                                onClick={handleFulFillClick}                                              
+                                                id="fulfill-btn"
+                                                value={order.id}
+                                                onClick={handleFulFillClick}
                                             >
                                                 Fulfill
                                             </Button>
