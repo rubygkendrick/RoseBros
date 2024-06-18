@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import "./InventoryView.css"
 import { useNavigate } from "react-router-dom";
 import { FaTrashAlt } from 'react-icons/fa';
-import { Button, Card, CardBody, CardImg, CardText, Col,  Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
-import { getRoses, updateStockStatus } from "../../managers/roseManager";
+import { Button, Card, CardBody, CardImg, CardText, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
+import { deleteRose, getRoses, updateStockStatus } from "../../managers/roseManager";
 
 
 
@@ -18,56 +18,89 @@ export default function InventoryView({ loggedInUser }) {
 
     const getAndResetInventory = () => {
         getRoses().then((res) => setInventory(res))
-           
+
     };
 
-   const handleAddClick = () => {
-    navigate("/add-inventory")
-   }
+    const handleAddClick = () => {
+        navigate("/add-inventory")
+    }
 
-   const handleUpdateStockConfirm = (event) => {
-    const roseId = parseInt(event.target.value)
-    updateStockStatus(roseId).then(() => setRefresh(!refresh))
-   }
+    const handleUpdateStockConfirm = (event) => {
+        const roseId = parseInt(event.target.value)
+        updateStockStatus(roseId).then(() => setRefresh(!refresh))
+    }
 
+    const handleDeleteClick = () => {
+        toggleModal();
+    }
+
+    const handleDeleteConfirm = (event) => {
+        const roseId = parseInt(event.target.value)
+        deleteRose(roseId).then(() => { setRefresh(!refresh) })
+        toggleModal();
+    }
+
+    const handleCancelClick = () => {
+        toggleModal();
+    }
 
     useEffect(() => {
         getAndResetInventory();
     }, [refresh]);
 
     return (
-                   <>
-                   <Button className="btn add-btn"
-                   onClick={handleAddClick}
-                   >Add Inventory</Button>
-                    <div className="order-card-container">
-                        {inventory.map((rose) => (
-                            <Card key={rose.id} className="order-card my-3">
-                                <Row className="g-0 align-items-center">
-                                    <Col xs="4" sm="3" md="2">
-                                        <CardImg className="order-card-img" src={rose.image} alt={rose.name} />
-                                    </Col>
-                                    <Col xs="8" sm="9" md="6">
-                                        <CardBody>
-                                            <CardText className="mb-0 rose-name"><strong>{rose.name} Rose</strong></CardText>
-                                            <CardText className="mb-0 price"><strong>${rose.pricePerUnit} per bareroot</strong></CardText>
-                                        </CardBody>
-                                    </Col>
-                                    <Col xs="4" sm="3" md="2">
-                                        {rose.outOfStock ? 
-                                        <Button value ={rose.id} onClick={handleUpdateStockConfirm} className="in-stock-btn">Back In Stock</Button> : 
-                                        <Button value ={rose.id} onClick={handleUpdateStockConfirm}>Out Of Stock</Button> }
-                                       
-                                    </Col>
-                                    <Col xs="4" sm="3" md="2">
-                                        <Button className="btn" >
-                                            <FaTrashAlt className="trash-icon" />
-                                        </Button>
-                                    </Col>
-                                </Row>
-                            </Card>
-                        ))}
-                    </div>
-                </>
+        <>
+            <Button className="btn add-btn"
+                onClick={handleAddClick}
+            >Add Inventory</Button>
+            <div className="order-card-container" >
+                {inventory.map((rose) => (
+                    <><Card key={rose.id} className="order-card my-3">
+                        <Row className="g-0 align-items-center">
+                            <Col xs="4" sm="3" md="2">
+                                <CardImg className="order-card-img" src={rose.image} alt={rose.name} />
+                            </Col>
+                            <Col xs="8" sm="9" md="6">
+                                <CardBody>
+                                    <CardText className="mb-0 rose-name">
+                                        <strong>{rose.name} Rose</strong>
+                                    </CardText>
+                                    <CardText className="mb-0 price">
+                                        <strong>${rose.pricePerUnit} per bareroot</strong>
+                                    </CardText>
+                                </CardBody>
+                            </Col>
+                            <Col xs="4" sm="3" md="2">
+                                {rose.outOfStock ?
+                                    <Button value={rose.id}
+                                        onClick={handleUpdateStockConfirm}
+                                        className="in-stock-btn">Back In Stock</Button> :
+                                    <Button value={rose.id}
+                                        onClick={handleUpdateStockConfirm}>Out Of Stock</Button>}
+
+                            </Col>
+                            <Col xs="4" sm="3" md="2">
+                                <Button className="btn" onClick={handleDeleteClick}>
+                                    <FaTrashAlt className="trash-icon" />
+                                </Button>
+                            </Col>
+                        </Row>
+                    </Card><Modal isOpen={modal} toggle={toggleModal} className="custom-modal">
+                            <ModalHeader toggle={toggleModal} className="custom-modal-header">Confirmation:</ModalHeader>
+                            <ModalBody className="custom-modal-body">
+                                Are you sure you want to delete this rose?
+                            </ModalBody>
+                            <ModalFooter className="custom-modal-footer">
+                                <Button className="custom-modal-button"
+                                onClick={handleCancelClick}>Cancel</Button>{' '}
+                                <Button className="custom-modal-button-secondary" 
+                                value={rose.id} onClick={handleDeleteConfirm}>Delete</Button>
+                            </ModalFooter>
+                        </Modal></>
+
+                ))}
+
+            </div>
+        </>
     );
 }

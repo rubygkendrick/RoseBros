@@ -167,4 +167,22 @@ public class RoseController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpDelete("delete/{roseId}")]
+    [Authorize(Roles = "Admin")]
+    public IActionResult DeleteRose(int roseId)
+    {
+        Rose roseToDelete = _dbContext.Roses
+          .SingleOrDefault(r => r.Id == roseId);
+
+        if (roseToDelete == null)
+        {
+            return NotFound("This rose is not in the system");
+        }
+
+        _dbContext.Roses.Remove(roseToDelete);
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
 }

@@ -23,3 +23,13 @@ export const updateStockStatus = (roseId) => {
     },
   })
 };
+
+
+export const deleteRose = (roseId) => {
+  return fetch(`${_apiUrl}/delete/${roseId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
