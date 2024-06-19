@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
 import "./AllRoses.css"
 
-import { Link, useNavigate } from "react-router-dom";
-import { Card, CardBody, CardTitle, CardText, CardImg, Row, Col } from "reactstrap";
+import { Link } from "react-router-dom";
+import { Card, CardBody, CardText, CardImg, Row, Col } from "reactstrap";
 import { getRoses } from "../../managers/roseManager";
 
 
 
-export default function AllRoses({ loggedInUser, setLoggedInUser, roles }) {
+
+export default function AllRoses() {
     const [roses, setRoses] = useState([]);
-    const navigate = useNavigate();
+
 
     const getAndResetAllRoses = () => {
         getRoses().then(setRoses);
     };
+
+
 
     useEffect(() => {
         getAndResetAllRoses();
@@ -38,9 +41,9 @@ export default function AllRoses({ loggedInUser, setLoggedInUser, roles }) {
                                         <CardText tag="h3">{rose.name}</CardText>
                                     </Link>
                                     <CardText>{rose.habit?.name} Rose</CardText>
-                                    {rose.outOfStock ? 
-                                    <CardText className="out-of-stock">Out of Stock</CardText> :
-                                    <CardText>${rose.pricePerUnit} per bareroot</CardText>}
+                                    {rose.outOfStock ?
+                                        <CardText className="out-of-stock">Out of Stock</CardText> :
+                                        <CardText>${rose.pricePerUnit} per bareroot</CardText>}
                                 </CardBody>
                             </Card>
                         </Col>

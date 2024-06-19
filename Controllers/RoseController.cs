@@ -135,7 +135,8 @@ public class RoseController : ControllerBase
         };
 
         _dbContext.Roses.Add(roseToAdd);
-        _dbContext.SaveChanges();
+        await _dbContext.SaveChangesAsync();
+       
 
         return Ok(roseToAdd);
     }
