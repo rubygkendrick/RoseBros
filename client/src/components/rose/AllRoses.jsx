@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./AllRoses.css"
-
 import { Link } from "react-router-dom";
 import { Card, CardBody, CardText, CardImg, Row, Col } from "reactstrap";
 import { getRoses } from "../../managers/roseManager";
