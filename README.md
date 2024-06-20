@@ -3,8 +3,11 @@
 Rose Bros is your destination for high-quality bare root English roses. An online shop curated by world renowned Rosarians ..the Rose Bros.
 At Rose Bros, we’re passionate about bringing the beauty of English roses to your garden. 
 We understand the frustration of searching for premium roses, so we’ve curated a collection that combines elegance, fragrance, and hardiness. 
-Search for your perfect rose by color, and habit, saving you time and effort. 
 With Rose Bros, your garden will flourish, and your love for roses will bloom. 🌹
+
+Rose Bros is an e-commerce platform specializing in high-quality English roses. This application facilitates 
+browsing, shopping, and purchasing experiences for users. Administrators benefit from specializedviews for 
+efficient store management andinventory monitoring.
 
 
 ## Technologies Used
