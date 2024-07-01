@@ -17,4 +17,10 @@
 
 #colorSearch {
   width: 15rem;
+  margin-right:1.5rem;
+  margin-top: 2rem;
+}
+
+.searchBars {
+  display: flex;
 }
