@@ -6,8 +6,8 @@ We understand the frustration of searching for premium roses, so we’ve curated
 With Rose Bros, your garden will flourish, and your love for roses will bloom. 🌹
 
 Rose Bros is an e-commerce platform specializing in high-quality English roses. This application facilitates 
-browsing, shopping, and purchasing experiences for users. Administrators benefit from specializedviews for 
-efficient store management andinventory monitoring.
+browsing, shopping, and purchasing experiences for users. Administrators benefit from specialized views for 
+efficient store management and inventory monitoring.
 
 
 ## Technologies Used
