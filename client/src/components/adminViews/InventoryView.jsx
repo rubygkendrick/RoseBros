@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./InventoryView.css"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaTrashAlt } from 'react-icons/fa';
 import { Button, Card, CardBody, CardImg, CardText, Col, Modal, ModalBody, ModalFooter, ModalHeader, Row } from "reactstrap";
 import { deleteRose, getRoses, updateStockStatus } from "../../managers/roseManager";
@@ -66,9 +66,12 @@ export default function InventoryView({ loggedInUser }) {
                             <Col xs="12" sm="9" md="6">
                                 <CardBody className="text-center">
                                     <div className="card-text-container">
-                                        <CardText className="mb-0 rose-name">
-                                            <strong>{rose.name}</strong>
-                                        </CardText>
+                                        <Link to={`/add-inventory/${rose.id}`} className="rose-title">
+                                            <CardText className="mb-0 rose-name">
+                                                <strong>{rose.name}</strong>
+                                            </CardText>
+                                        </Link>
+
                                         <CardText className="mb-0" id="price">
                                             <strong>${rose.pricePerUnit} per bareroot</strong>
                                         </CardText>
