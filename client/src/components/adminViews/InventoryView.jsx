@@ -66,7 +66,7 @@ export default function InventoryView({ loggedInUser }) {
                             <Col xs="12" sm="9" md="6">
                                 <CardBody className="text-center">
                                     <div className="card-text-container">
-                                        <Link to={`/add-inventory/${rose.id}`} className="rose-title">
+                                        <Link to={`/add-inventory/${rose.id}`} className="rose-name">
                                             <CardText className="mb-0 rose-name">
                                                 <strong>{rose.name}</strong>
                                             </CardText>

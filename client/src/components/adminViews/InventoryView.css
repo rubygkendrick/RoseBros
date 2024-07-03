@@ -106,3 +106,7 @@
 .in-stock-btn:hover{
     background-color: #333;
 }
+
+.rose-name:hover {
+    color: #990303;
+}
