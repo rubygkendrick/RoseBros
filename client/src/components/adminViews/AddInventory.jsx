@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./AddInventory.css";
 import { getColors } from "../../managers/colorManager";
 import { getHabits } from "../../managers/habitManager";
-import { addRose } from "../../managers/roseManager";
+import { addRose, getRoseById } from "../../managers/roseManager";
 
 export default function AddInventory() {
     const [roseName, setRoseName] = useState("");
@@ -16,6 +16,12 @@ export default function AddInventory() {
     const [errors, setErrors] = useState(false);
     const [colors, setColors] = useState([]);
     const [habits, setHabits] = useState([]);
+    const [currentRose, setCurrentRose] = useState([]);
+    const {id} = useParams();
+
+    //conditionally render the form if current Rose variable exists 
+    //get rose by id with the useParams variable
+    //store that rose in a state variable upon initial render
 
     const navigate = useNavigate();
 
@@ -27,9 +33,14 @@ export default function AddInventory() {
         getHabits().then(setHabits);
     };
 
+    const getAndSetCurrentRose = () => {
+        getRoseById(id).then(setCurrentRose);
+    }
+
     useEffect(() => {
         getAndSetColors();
         getAndSetHabits();
+        getAndSetCurrentRose();
     }, []);
 
     const handleSubmit = (e) => {
@@ -134,7 +145,7 @@ export default function AddInventory() {
                     />
                 </FormGroup>
 
-                <Button type="submit" id = "submit-btn" className= "submit">
+                <Button type="submit" id="submit-btn" className="submit">
                     Submit
                 </Button>
             </Form>
