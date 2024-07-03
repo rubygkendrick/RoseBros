@@ -17,7 +17,7 @@ export default function AddInventory() {
     const [colors, setColors] = useState([]);
     const [habits, setHabits] = useState([]);
     const [currentRose, setCurrentRose] = useState([]);
-    const {id} = useParams();
+    const { id } = useParams();
 
     //conditionally render the form if current Rose variable exists 
     //get rose by id with the useParams variable
@@ -42,6 +42,17 @@ export default function AddInventory() {
         getAndSetHabits();
         getAndSetCurrentRose();
     }, []);
+
+    useEffect(() => {
+        if (currentRose) {
+            setRoseName(currentRose.name);
+            setColorId(currentRose.colorId);
+            setHabitId(currentRose.habitId);
+            setDescription(currentRose.description);
+            setPricePerUnit(currentRose.pricePerUnit);
+
+        }
+    }, [currentRose]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -71,14 +82,24 @@ export default function AddInventory() {
                     </p>
                 ))}
             </div>
+            {currentRose ? (
+                <div className="thumbnail-container">
+                    <p>Current Image:</p>
+                    <img
+                        src={currentRose.image}
+                        alt="Current Rose Thumbnail"
+                        className="thumbnail-image"
+                    />
+                </div>
+            ) : ""}
 
-            <Form className="form-body" onSubmit={handleSubmit}>
+            <Form className="form-body" id="form-overall" onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label>Rose Name</Label>
                     <Input
                         className="input-field"
                         type="text"
-                        defaultValue=""
+                        placeholder={roseName}
                         onChange={(e) => setRoseName(e.target.value)}
                     />
                 </FormGroup>
@@ -88,7 +109,7 @@ export default function AddInventory() {
                         type="select"
                         id="colorSelect"
                         className="input-field"
-                        defaultValue=""
+                        value={colorId}
                         onChange={(e) => setColorId(e.target.value)}
                     >
                         <option value="">select a color</option>
@@ -122,6 +143,7 @@ export default function AddInventory() {
                         type="textarea"
                         className="input-field"
                         id="description"
+                        placeholder={description}
                         rows="6"
                         onChange={(e) => setDescription(e.target.value)}
                     />
@@ -141,6 +163,7 @@ export default function AddInventory() {
                         type="text"
                         className="input-field"
                         id="pricePerUnit"
+                        placeholder={pricePerUnit}
                         onChange={(e) => setPricePerUnit(e.target.value)}
                     />
                 </FormGroup>
