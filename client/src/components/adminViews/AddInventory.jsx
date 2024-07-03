@@ -100,7 +100,7 @@ export default function AddInventory() {
                     <Input
                         className="input-field"
                         type="text"
-                        placeholder={roseName}
+                        defaultValue={roseName}
                         onChange={(e) => setRoseName(e.target.value)}
                     />
                 </FormGroup>
@@ -144,7 +144,7 @@ export default function AddInventory() {
                         type="textarea"
                         className="input-field"
                         id="description"
-                        placeholder={description}
+                        defaultValue={description}
                         rows="6"
                         onChange={(e) => setDescription(e.target.value)}
                     />
