@@ -19,10 +19,6 @@ export default function AddInventory() {
     const [currentRose, setCurrentRose] = useState([]);
     const { id } = useParams();
 
-    //conditionally render the form if current Rose variable exists 
-    //get rose by id with the useParams variable
-    //store that rose in a state variable upon initial render
-
     const navigate = useNavigate();
 
     const getAndSetColors = () => {
@@ -34,7 +30,12 @@ export default function AddInventory() {
     };
 
     const getAndSetCurrentRose = () => {
-        getRoseById(id).then(setCurrentRose);
+        if(id) {
+            getRoseById(id).then(setCurrentRose);
+        }
+        else {
+            setCurrentRose("");
+        }        
     }
 
     useEffect(() => {
