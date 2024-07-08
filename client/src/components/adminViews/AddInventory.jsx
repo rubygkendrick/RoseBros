@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./AddInventory.css";
 import { getColors } from "../../managers/colorManager";
 import { getHabits } from "../../managers/habitManager";
-import { addRose } from "../../managers/roseManager";
+import { addRose, getRoseById } from "../../managers/roseManager";
 
 export default function AddInventory() {
     const [roseName, setRoseName] = useState("");
@@ -16,6 +16,8 @@ export default function AddInventory() {
     const [errors, setErrors] = useState(false);
     const [colors, setColors] = useState([]);
     const [habits, setHabits] = useState([]);
+    const [currentRose, setCurrentRose] = useState([]);
+    const { id } = useParams();
 
     const navigate = useNavigate();
 
@@ -27,10 +29,31 @@ export default function AddInventory() {
         getHabits().then(setHabits);
     };
 
+    const getAndSetCurrentRose = () => {
+        if(id) {
+            getRoseById(id).then(setCurrentRose);
+        }
+        else {
+            setCurrentRose("");
+        }        
+    }
+
     useEffect(() => {
         getAndSetColors();
         getAndSetHabits();
+        getAndSetCurrentRose();
     }, []);
+
+    useEffect(() => {
+        if (currentRose) {
+            setRoseName(currentRose.name);
+            setColorId(currentRose.colorId);
+            setHabitId(currentRose.habitId);
+            setDescription(currentRose.description);
+            setPricePerUnit(currentRose.pricePerUnit);
+
+        }
+    }, [currentRose]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -60,14 +83,24 @@ export default function AddInventory() {
                     </p>
                 ))}
             </div>
+            {currentRose ? (
+                <div className="thumbnail-container">
+                    <p>Current Image:</p>
+                    <img
+                        src={currentRose.image}
+                        alt="Current Rose Thumbnail"
+                        className="thumbnail-image"
+                    />
+                </div>
+            ) : ""}
 
-            <Form className="form-body" onSubmit={handleSubmit}>
+            <Form className="form-body" id="form-overall" onSubmit={handleSubmit}>
                 <FormGroup>
                     <Label>Rose Name</Label>
                     <Input
                         className="input-field"
                         type="text"
-                        defaultValue=""
+                        defaultValue={roseName}
                         onChange={(e) => setRoseName(e.target.value)}
                     />
                 </FormGroup>
@@ -77,7 +110,7 @@ export default function AddInventory() {
                         type="select"
                         id="colorSelect"
                         className="input-field"
-                        defaultValue=""
+                        value={colorId}
                         onChange={(e) => setColorId(e.target.value)}
                     >
                         <option value="">select a color</option>
@@ -111,6 +144,7 @@ export default function AddInventory() {
                         type="textarea"
                         className="input-field"
                         id="description"
+                        defaultValue={description}
                         rows="6"
                         onChange={(e) => setDescription(e.target.value)}
                     />
@@ -130,11 +164,12 @@ export default function AddInventory() {
                         type="text"
                         className="input-field"
                         id="pricePerUnit"
+                        placeholder={pricePerUnit}
                         onChange={(e) => setPricePerUnit(e.target.value)}
                     />
                 </FormGroup>
 
-                <Button type="submit" id = "submit-btn" className= "submit">
+                <Button type="submit" id="submit-btn" className="submit">
                     Submit
                 </Button>
             </Form>

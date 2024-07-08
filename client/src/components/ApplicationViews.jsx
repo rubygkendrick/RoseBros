@@ -61,7 +61,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
-         <Route
+        <Route
           path="inventory"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
@@ -73,7 +73,15 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="add-inventory"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
-              <AddInventory loggedInUser={loggedInUser} roles={["Admin"]}/>
+              <AddInventory loggedInUser={loggedInUser} roles={["Admin"]} />
+            </AuthorizedRoute>
+          }
+        />
+        <Route
+          path="add-inventory/:id"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
+              <AddInventory loggedInUser={loggedInUser} roles={["Admin"]} />
             </AuthorizedRoute>
           }
         />
@@ -81,7 +89,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           path="orders"
           element={
             <AuthorizedRoute loggedInUser={loggedInUser} roles={["Admin"]}>
-              <OrdersView loggedInUser={loggedInUser} roles={["Admin"]}/>
+              <OrdersView loggedInUser={loggedInUser} roles={["Admin"]} />
             </AuthorizedRoute>
           }
         />
