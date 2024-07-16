@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -136,7 +137,7 @@ public class RoseController : ControllerBase
 
         _dbContext.Roses.Add(roseToAdd);
         await _dbContext.SaveChangesAsync();
-       
+
 
         return Ok(roseToAdd);
     }
@@ -185,5 +186,59 @@ public class RoseController : ControllerBase
         _dbContext.SaveChanges();
 
         return NoContent();
+    }
+
+    [HttpPut("add-inventory/{id}")]
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> AddRose(int id, [FromForm] IFormFile image, [FromForm] string name,
+    [FromForm] int colorId, [FromForm] int habitId, [FromForm] string description, [FromForm] int pricePerUnit)
+    {
+        if (image == null || image.Length == 0 || string.IsNullOrEmpty(name))
+        {
+            return BadRequest("The rose you are trying to add is null or has incomplete information");
+        }
+
+        var existingRose = _dbContext.Roses.FirstOrDefault(r => r.Id == id);
+
+        var color = _dbContext.Colors.Find(colorId);
+        var habit = _dbContext.Habits.Find(habitId);
+
+        if (color == null || habit == null)
+        {
+            return BadRequest("Invalid ColorId or HabitId");
+        }
+
+        if (existingRose == null)
+        {
+            return BadRequest("This rose does not exist in the database to update, please add a new rose instead");
+        }
+
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "client", "public", "uploads");
+        if (!Directory.Exists(uploadsFolder))
+        {
+            Directory.CreateDirectory(uploadsFolder);
+        }
+
+        var filePath = Path.Combine(uploadsFolder, image.FileName);
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await image.CopyToAsync(stream);
+        }
+
+        existingRose.Name = name;
+        existingRose.ColorId = colorId;
+        existingRose.Color = color;
+        existingRose.HabitId = habitId;
+        existingRose.Habit = habit;
+        existingRose.Description = description;
+        existingRose.Image = $"/uploads/{image.FileName}";
+        existingRose.PricePerUnit = pricePerUnit;
+       
+
+    
+      _dbContext.SaveChanges();
+
+
+        return Ok(existingRose);
     }
 }
